@@ -1,0 +1,865 @@
+\documentclass[11pt,a4paper]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[swedish]{babel}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{graphicx}
+\usepackage{tikz-dependency}
+\usepackage{covington}
+\usepackage{hyperref}
+
+\title{Beskrivning av UD-kategorier \\ för svenskt teckenspråk}
+\author{Carl Börstell}
+
+\newcommand{\ampersand}{\&}
+
+\begin{document}
+
+\maketitle
+
+\tableofcontents
+
+\section{root}
+Kategorin \texttt{root} används för det första huvudpredikatet i en mening, vilket kan utgöras av ett verb (\ref{ex:root_verb}), substantiv (\ref{ex:root_noun}), eller adjektiv (\ref{ex:root_adj}).
+
+\begin{example}
+\label{ex:root_verb}
+\begin{dependency}[theme = simple]
+   \begin{deptext}[column sep=1em]
+      \textsc{pro1} \& \textsc{äta} \\
+   \end{deptext}
+   \deproot{2}{root}
+   \depedge{2}{1}{nsubj}
+\end{dependency}
+\\
+\textit{Jag äter.}
+\end{example}
+
+\begin{example}
+\label{ex:root_noun}
+\begin{dependency}[theme = simple]
+   \begin{deptext}[column sep=1em]
+      \textsc{pro1} \& \textsc{döv} \\
+   \end{deptext}
+   \deproot{2}{root}
+   \depedge{2}{1}{nsubj}
+\end{dependency}
+\\
+\textit{Jag är döv.}
+\end{example}
+
+\begin{example}
+\label{ex:root_adj}
+\begin{dependency}[theme = simple]
+   \begin{deptext}[column sep=1em]
+      \textsc{pro1} \& \textsc{trött} \\
+   \end{deptext}
+   \deproot{2}{root}
+   \depedge{2}{1}{nsubj}
+\end{dependency}
+\\
+\textit{Jag är trött.}
+\end{example}
+
+
+\section{nsubj}
+Kategorin \texttt{nsubj} används för både lexikala (\ref{ex:nsubj_lex}) och pronominella (\ref{ex:nsubj_pro}) subjekt.
+
+\begin{example}
+\label{ex:nsubj_lex}
+\begin{dependency}[theme = simple]
+   \begin{deptext}[column sep=1em]
+      \textsc{poss1} \& \textsc{bror} \& \textsc{döv} \\
+   \end{deptext}
+   \deproot{3}{root}
+   \depedge{3}{2}{nsubj}
+   \depedge{2}{1}{case}
+\end{dependency}
+\\
+\textit{Min bror är döv.}
+\end{example}
+
+\begin{example}
+\label{ex:nsubj_pro}
+\begin{dependency}[theme = simple]
+   \begin{deptext}[column sep=1em]
+      \textsc{pro1} \& \textsc{döv} \\
+   \end{deptext}
+   \deproot{2}{root}
+   \depedge{2}{1}{nsubj}
+\end{dependency}
+\\
+\textit{Jag är döv.}
+\end{example}
+
+
+\section{dobj}
+Kategorin \texttt{dobj} används för både lexikala (\ref{ex:dobj_lex}) och pronominella (\ref{ex:dobj_pro}) direkta objekt.
+
+\begin{example}
+\label{ex:dobj_lex}
+\begin{dependency}[theme = simple]
+   \begin{deptext}[column sep=1em]
+      \textsc{pro1} \& \textsc{älska} \& \textsc{poss1} \& \textsc{bror} \\
+   \end{deptext}
+   \deproot{2}{root}
+   \depedge{2}{1}{nsubj}
+   \depedge{4}{3}{case}
+   \depedge{2}{4}{dobj}
+\end{dependency}
+\\
+\textit{Jag älskar min bror.}
+\end{example}
+
+\begin{example}
+\label{ex:dobj_pro}
+\begin{dependency}[theme = simple]
+   \begin{deptext}[column sep=1em]
+      \textsc{pro1} \& \textsc{älska} \& \textsc{objpro} \\
+   \end{deptext}
+   \deproot{2}{root}
+   \depedge{2}{1}{nsubj}
+   \depedge{2}{3}{dobj}
+\end{dependency}
+\\
+\textit{Jag älskar henom.}
+\end{example}
+
+\section{iobj}
+Kategorin \texttt{iobj} används för både lexikala (\ref{ex:iobj_lex}) och pronominella (\ref{ex:iobj_pro}) indirekta objekt.
+
+\begin{example}
+\label{ex:iobj_lex}
+\begin{dependency}[theme = simple]
+   \begin{deptext}[column sep=1em]
+      \textsc{pro1} \& \textsc{vill} \& \textsc{fråga} \& \textsc{läkare} \& \textsc{en} \& \textsc{sak} \\
+   \end{deptext}
+   \deproot{3}{root}
+   \depedge{3}{1}{nsubj}
+   \depedge{3}{2}{aux}
+   \depedge{3}{4}{iobj}
+   \depedge{6}{5}{det}
+   \depedge{3}{6}{dobj}
+\end{dependency}
+\\
+\textit{Jag vill fråga läkaren en sak.}
+\end{example}
+
+\begin{example}
+\label{ex:iobj_pro}
+\begin{dependency}[theme = simple]
+   \begin{deptext}[column sep=1em]
+      \textsc{pro1} \& \textsc{vill} \& \textsc{fråga} \& \textsc{objpro}{\textgreater}närv \& \textsc{en} \& \textsc{sak} \\
+   \end{deptext}
+   \deproot{3}{root}
+   \depedge{3}{1}{nsubj}
+   \depedge{3}{2}{aux}
+   \depedge{3}{4}{iobj}
+   \depedge{6}{5}{det}
+   \depedge{3}{6}{dobj}
+\end{dependency}
+\\
+\textit{Jag vill fråga dig en sak.}
+\end{example}
+
+\noindent Notera att objekt som introduceras med en preposition räknas till kategorin \texttt{nmod} (\ref{ex:nmod_iobj}) -- se avsnitt §\ref{sec:nmod}.
+
+\begin{example}
+\label{ex:nmod_iobj}
+\begin{dependency}[theme = simple]
+   \begin{deptext}[column sep=1em]
+      \textsc{man} \& \textsc{pek} \& \textsc{skicka1} \& \textsc{brev} \& \textsc{till} \& \textsc{objpro1} \\
+   \end{deptext}
+   \deproot{3}{root}
+   \depedge{3}{1}{nsubj}
+   \depedge{1}{2}{det}
+   \depedge{3}{4}{dobj}
+   \depedge{6}{5}{case}
+   \depedge{3}{6}{nmod}
+\end{dependency}
+\\
+\textit{Mannen skickade ett brev till mig.}
+\end{example}
+
+\section{ccomp}
+Kategorin \texttt{ccomp} används för satser som fungerar som komplement/objekt i en annan sats, oavsett om komplementsatsen har ett verb (\ref{ex:ccomp_verb}) eller substantiv (\ref{ex:ccomp_noun}) som huvudord.
+
+\begin{example}
+\label{ex:ccomp_verb}
+\begin{dependency}[theme = simple]
+   \begin{deptext}[column sep=1em]
+      \textsc{pro1} \& \textsc{tro} \& \textsc{lärare} \& \textsc{komma-hit} \& \textsc{imorgon} \\
+   \end{deptext}
+   \deproot{2}{root}
+   \depedge{2}{1}{nsubj}
+   \depedge{4}{3}{nsubj}
+   \depedge{2}{4}{ccomp}
+   \depedge{4}{5}{advmod}
+\end{dependency}
+\\
+\textit{Jag tycker (att) den är bäst.}
+\end{example}
+
+\begin{example}
+\label{ex:ccomp_noun}
+\begin{dependency}[theme = simple]
+   \begin{deptext}[column sep=1em]
+      \textsc{pro1} \& \textsc{tycka} \& \textsc{pek} \& \textsc{bäst} \\
+   \end{deptext}
+   \deproot{2}{root}
+   \depedge{2}{1}{nsubj}
+   \depedge{4}{3}{nsubj}
+   \depedge{2}{4}{ccomp}
+\end{dependency}
+\\
+\textit{Jag tycker (att) den är bäst.}
+\end{example}
+
+
+\section{nummod}
+
+\begin{example}
+\label{ex:nummod}
+\begin{dependency}[theme = simple]
+   \begin{deptext}[column sep=1em]
+      \textsc{pek} \& \textsc{vinna} \& \textsc{tre} \& \textsc{miljon} \& \textsc{krona} \\
+   \end{deptext}
+   \deproot{2}{root}
+   \depedge{2}{1}{nsubj}
+   \depedge{5}{4}{nummod}
+   \depedge{4}{3}{compound}
+   \depedge{2}{5}{dobj}
+\end{dependency}
+\\
+\textit{Hen vann tre miljoner kronor.}
+\end{example}
+
+\section{appos}
+Kategorin \texttt{appos} används när ett substantiv direkt refererar till ett annat substantiv, ofta parentetiskt, som kan vara titlar eller bara extra information om samma referent för att mottagaren ska veta vem som refereras till (\ref{ex:appos}).
+
+\begin{example}
+\label{ex:appos}
+\begin{dependency}[theme = simple]
+   \begin{deptext}[column sep=1em]
+      \textsc{anders} \& \textsc{poss1} \& \textsc{bror} \& \textsc{döv} \\
+   \end{deptext}
+   \deproot{4}{root}
+   \depedge{4}{1}{nsubj}
+   \depedge{3}{2}{case}
+   \depedge{1}{3}{appos}
+\end{dependency}
+\\
+\textit{Anders, min bror, är döv.}
+\end{example}
+
+\section{nmod}
+\label{sec:nmod}
+Kategorin \texttt{nmod} används för substantiv som modifierar ett annat ord (\ref{ex:nmod}), eller undantagsvis för objekt som uttrycks med en preposition före (\ref{ex:nmod_obj}).
+
+\begin{example}
+\label{ex:nmod}
+\begin{dependency}[theme = simple]
+   \begin{deptext}[column sep=1em]
+      \textsc{sverige} \& \textsc{poss} \& \textsc{kung} \& \textsc{komma-dit} \& \textsc{imorgon} \\
+   \end{deptext}
+   \deproot{4}{root}
+   \depedge{4}{3}{nsubj}
+   \depedge{3}{1}{nmod}
+   \depedge{1}{2}{case}
+   \depedge{4}{5}{advmod}
+\end{dependency}
+\\
+\textit{Sveriges kung åker dit imorgon.}
+\end{example}
+
+\begin{example}
+\label{ex:nmod_obj}
+\begin{dependency}[theme = simple]
+   \begin{deptext}[column sep=1em]
+      \textsc{man} \& \textsc{pek} \& \textsc{skicka1} \& \textsc{brev} \& \textsc{till} \& \textsc{objpro1} \\
+   \end{deptext}
+   \deproot{3}{root}
+   \depedge{3}{1}{nsubj}
+   \depedge{1}{2}{det}
+   \depedge{3}{4}{dobj}
+   \depedge{6}{5}{case}
+   \depedge{3}{6}{nmod}
+\end{dependency}
+\\
+\textit{Mannen skickade ett brev till mig.}
+\end{example}
+
+\section{acl}
+Kategorin \texttt{acl} används för adverbiell modifiering av ett substantiv (\ref{ex:acl}), alltså inte modifiering av ett predikat (se istället \ref{sec:advcl}).
+
+\begin{example}
+\label{ex:acl}
+\begin{dependency}[theme = simple]
+   \begin{deptext}[column sep=1em]
+      \textsc{pojke} \& \textsc{sitta} \& \textsc{varelse}(Vb)-\textsc{befinna-sig} \& \textsc{ledsen} \\
+   \end{deptext}
+   \deproot{2}{root}
+   \depedge{2}{1}{nsubj}
+   \depedge{2}{3}{conj}
+   \depedge[arc angle=55,edge start x offset=-8pt]{1}{4}{acl}
+\end{dependency}
+\\
+\textit{Pojken satt (där), ledsen.}
+\end{example}
+
+%   \depedge[edge start x offset=-6pt]{2}{5}{ATT}
+%   \depedge{3}{2}{SBJ}
+%   \depedge{3}{9}{PU}
+%   \depedge{3}{4}{VC}
+%   \depedge{4}{8}{TMP}
+%   \depedge{5}{7}{PC}
+%   \depedge[arc angle=50]{7}{6}{ATT}
+
+\section{amod}
+Kategorin \texttt{amod} används för adjektiv som modifierar ett annat tecken, oftast ett substantiv (\ref{ex:amod}).
+
+\begin{example}
+\label{ex:amod}
+\begin{dependency}[theme = simple]
+   \begin{deptext}[column sep=1em]
+      \textsc{en} \& \textsc{röd} \& \textsc{hus} \\
+   \end{deptext}
+   \depedge{3}{1}{det}
+   \depedge[arc angle=40]{3}{2}{amod}
+\end{dependency}
+\\
+\textit{ett rött hus}
+\end{example}
+
+\section{det}
+Kategorin \texttt{det} används för determinerare (bestämmare) till substantiv. I de allra flesta fall kommer detta utgöras av antingen tecknet \textsc{en} när den följer svenskans \textit{en/ett} i t.ex. \textit{en pojke}, dvs. det syftar inte specifikt på antal utan snarare obestämd form (\ref{ex:det_num}), eller en pekning som förekommer tillsammans med ett substantiv som en bestämning (\ref{ex:det_pek}).
+
+\begin{example}
+\label{ex:det_num}
+\begin{dependency}[theme = simple]
+   \begin{deptext}[column sep=1em]
+      \textsc{pro1} \& \textsc{vill} \& \textsc{fråga} \& \textsc{objpro}{\textgreater}närv \& \textsc{en} \& \textsc{sak} \\
+   \end{deptext}
+   \deproot{3}{root}
+   \depedge{3}{1}{nsubj}
+   \depedge{3}{2}{aux}
+   \depedge{3}{4}{iobj}
+   \depedge{6}{5}{det}
+   \depedge{3}{6}{dobj}
+\end{dependency}
+\\
+\textit{Jag vill fråga dig en sak.}
+\end{example}
+
+\begin{example}
+\label{ex:det_pek}
+\begin{dependency}[theme = simple]
+   \begin{deptext}[column sep=1em]
+      \textsc{man} \& \textsc{pek} \& \textsc{skicka1} \& \textsc{brev} \& \textsc{till} \& \textsc{objpro1} \\
+   \end{deptext}
+   \deproot{3}{root}
+   \depedge{3}{1}{nsubj}
+   \depedge{1}{2}{det}
+   \depedge{3}{4}{dobj}
+   \depedge{6}{5}{case}
+   \depedge{3}{6}{nmod}
+\end{dependency}
+\\
+\textit{Mannen skickade ett brev till mig.}
+\end{example}
+
+
+\section{neg}
+\label{sec:neg}
+Kategorin \texttt{neg} används för negationstecken (obs, endast manuella sådana, eftersom vi inte kan tagga huvudskakningar). Detta utgörs främst av tecknet \textsc{inte}, oavsett om det modifierar ett verb (\ref{ex:neg_verb}) eller ett icke-verbalt tecken (\ref{ex:neg_noun}). 
+
+\begin{example}
+\label{ex:neg_verb}
+\begin{dependency}[theme = simple]
+   \begin{deptext}[column sep=1em]
+      \textsc{pro1}  \& \textsc{äta} \& \textsc{inte} \& \textsc{kött} \\
+   \end{deptext}
+   \deproot{2}{root}
+   \depedge{2}{1}{nsubj}
+   \depedge{2}{3}{neg}
+   \depedge{2}{4}{dobj}
+\end{dependency}
+\\
+\textit{Jag äter inte kött.}
+\end{example}
+
+\begin{example}
+\label{ex:neg_noun}
+\begin{dependency}[theme = simple]
+   \begin{deptext}[column sep=1em]
+      \textsc{inte} \& \textsc{döv} \& \textsc{pro1} \\
+   \end{deptext}
+   \deproot{2}{root}
+   \depedge{2}{1}{neg}
+   \depedge{2}{3}{nsubj}
+\end{dependency}
+\\
+\textit{Jag är döv.}
+\end{example}
+
+\noindent Notera att inherent negativa tecken med annan funktion \textit{inte} annoteras som \texttt{neg}, t.ex. negativa hjälpverb (\ref{ex:perf-neg}) eller negativa adverb (\ref{ex:neg_adv}).\footnote{Kolla upp hur detta faktiskt görs i andra UD-språk. Jag skulle kunna se en idé i att låta dessa vara språkspecifika underkategorier, t.ex. \texttt{aux:neg} respektive \texttt{advmod:neg}, eller liknande.}
+
+\begin{example}
+\label{ex:perf-neg}
+\begin{dependency}[theme = simple]
+   \begin{deptext}[column sep=1em]
+      \textsc{pro1} \& \textsc{perf-neg} \& \textsc{äta} \\
+   \end{deptext}
+   \deproot{3}{root}
+   \depedge{3}{1}{nsubj}
+   \depedge{3}{2}{aux}
+\end{dependency}
+\\
+\textit{Jag har inte ätit.}
+\end{example}
+
+\begin{example}
+\label{ex:neg_adv}
+\begin{dependency}[theme = simple]
+   \begin{deptext}[column sep=1em]
+      \textsc{pro1} \& \textsc{aldrig} \& \textsc{äta} \& \textsc{frukost} \\
+   \end{deptext}
+   \deproot{3}{root}
+   \depedge{3}{1}{nsubj}
+   \depedge{3}{2}{adv}
+   \depedge{3}{4}{dobj}
+\end{dependency}
+\\
+\textit{Jag äter aldrig frukost.}
+\end{example}
+
+\section{case}
+Kategorin \texttt{case} används när det finns en uttryckt preposition i meningen (\ref{ex:case_obj}).
+
+\begin{example}
+\label{ex:case_obj}
+\begin{dependency}[theme = simple]
+   \begin{deptext}[column sep=1em]
+      \textsc{man} \& \textsc{pek} \& \textsc{skicka1} \& \textsc{brev} \& \textsc{till} \& \textsc{objpro1} \\
+   \end{deptext}
+   \deproot{3}{root}
+   \depedge{3}{1}{nsubj}
+   \depedge{1}{2}{det}
+   \depedge{3}{4}{dobj}
+   \depedge{6}{5}{case}
+   \depedge{3}{6}{nmod}
+\end{dependency}
+\\
+\textit{Mannen skickade ett brev till mig.}
+\end{example}
+
+\section{advcl}
+\label{sec:advcl}
+Kategorin \texttt{advcl} används för predikatet i en bisats som modifierar en huvudsats, t.ex. genom att tala om när (\ref{ex:advcl_when}) eller under vilka förutsättningar (\ref{ex:advcl_why}) något sker.
+
+\begin{example}
+\label{ex:advcl_when}
+\begin{dependency}[theme = simple]
+   \begin{deptext}[column sep=1em]
+      \textsc{förut} \& \textsc{pek} \& \textsc{jobba} \& \textsc{företag} \& \textsc{pi} \& \textsc{rik} \& \textsc{pek} \\
+   \end{deptext}
+   \deproot{6}{root}
+   \depedge{6}{7}{nsubj}
+   \depedge{6}{5}{advmod}
+   \depedge{6}{3}{advcl}
+   \depedge{3}{4}{nmod}
+   \depedge{3}{2}{nsubj}
+   \depedge{3}{1}{advmod}
+\end{dependency}
+\\
+\textit{Förut när hen jobbade på företag var hen jätterik.}
+\end{example}
+
+\begin{example}
+\label{ex:advcl_why}
+\begin{dependency}[theme = simple]
+   \begin{deptext}[column sep=1em]
+      \textsc{om}@b \& \textsc{regna} \& \textsc{imorgon} \& \textsc{fut-neg} \& \textsc{komma-dit} \& \textsc{pro1}  \\
+   \end{deptext}
+   \deproot{5}{root}
+   \depedge{5}{6}{nsubj}
+   \depedge{5}{4}{aux}
+   \depedge{5}{2}{advcl}
+   \depedge{2}{1}{mark}
+   \depedge{2}{3}{advmod}
+\end{dependency}
+\\
+\textit{Om det regnar imorgon åker jag inte dit.}
+\end{example}
+
+\section{advmod}
+Kategorin \texttt{advmod} används för adverb som modifierar antingen ett adjektiv/adverb (\ref{ex:adv_how}) eller ett predikat, t.ex. för att tala om \textit{när} (\ref{ex:adv_time}) eller \textit{hur} (\ref{ex:adv_how}) något hände/gjordes.
+
+\begin{example}
+\label{ex:adv_how}
+\begin{dependency}[theme = simple]
+   \begin{deptext}[column sep=1em]
+      \textsc{pek} \& \textsc{teckna} \& \textsc{pi} \& \textsc{fort} \\
+   \end{deptext}
+   \deproot{2}{root}
+   \depedge{2}{1}{nsubj}
+   \depedge{4}{3}{advmod}
+   \depedge{2}{4}{advmod}
+\end{dependency}
+\\
+\textit{Hen tecknade jättefort.}
+\end{example}
+
+\begin{example}
+\label{ex:adv_time}
+\begin{dependency}[theme = simple]
+   \begin{deptext}[column sep=1em]
+      \textsc{pro1} \& \textsc{perf} \& \textsc{fråga} \& \textsc{objpro}{\textgreater}närv \& \textsc{förut} \\
+   \end{deptext}
+   \deproot{3}{root}
+   \depedge{3}{1}{nsubj}
+   \depedge{3}{2}{aux}
+   \depedge{3}{4}{iobj}
+   \depedge{3}{5}{advmod}
+\end{dependency}
+\\
+\textit{Jag har frågat dig förut.}
+\end{example}
+
+\section{compound}
+Kategorin \texttt{compound} används om vi har sammansättningar som glossats som separata tecken -- vilket vi sällan borde ha eftersom sammansättningar nu glossas i samma cell -- men också sammansatta siffror som eventuellt glossas som separata tecken (\ref{ex:compound_num}).
+
+\begin{example}
+\label{ex:compound_num}
+\begin{dependency}[theme = simple]
+   \begin{deptext}[column sep=1em]
+      \textsc{pek} \& \textsc{vinna} \& \textsc{tre} \& \textsc{miljon} \& \textsc{krona} \\
+   \end{deptext}
+   \deproot{2}{root}
+   \depedge{2}{1}{nsubj}
+   \depedge{5}{4}{nummod}
+   \depedge{4}{3}{compound}
+   \depedge{2}{5}{dobj}
+\end{dependency}
+\\
+\textit{Hen vann tre miljoner kronor.}
+\end{example}
+
+\section{foreign}
+Kategorin \texttt{foreign} kommer vi nog enbart att behöva använda i de få fall det handlar om en metalingvistisk situation, dvs. att tecknarna pratar om tecken eller ord från ett annat språk. Det skulle t.ex. vara när någon bokstaverar en svensk mening ord för ord (\ref{ex:foreign}). Notera att första tecknet får en vanlig UD-tagg, medan följande räknas som \texttt{foreign}.
+
+\begin{example}
+\label{ex:foreign}
+\begin{dependency}[theme = simple]
+   \begin{deptext}[column sep=1em]
+      \textsc{pek} \& \textsc{sade} \& \textsc{jag}@b \& \textsc{är}@b \& \textsc{döv}@b \\
+   \end{deptext}
+   \deproot{2}{root}
+   \depedge{2}{1}{nsubj}
+   \depedge{2}{3}{ccomp}
+   \depedge{3}{4}{foreign}
+   \depedge{3}{5}{foreign}
+\end{dependency}
+\\
+\textit{Hen sade: ''Jag är döv''.}
+\end{example}
+
+
+\section{reparandum}
+Kategorin \texttt{reparandum} används för felsägningar (avbrutna, markerade med \texttt{@\&}\footnote{Här har \& ersatts med \texttt{avb} bara för att {\LaTeX} inte tillåter {\&}-symbolen i dessa figurer.}, eller fullständiga) som repareras av tecknaren. Den kopplas till det korrekta/tilltänkta tecknet (\ref{ex:reparandum}).
+
+\begin{example}
+\label{ex:reparandum}
+\begin{dependency}[theme = simple]
+   \begin{deptext}[column sep=1em]
+      \textsc{pro1} \& \textsc{komma-dit} \& \textsc{uppsala}@avb \& \textsc{umeå}\\
+   \end{deptext}
+   \deproot{2}{root}
+   \depedge{2}{1}{nsubj}
+   \depedge{2}{4}{nmod}
+   \depedge{4}{3}{reparandum}
+\end{dependency}
+\\
+\textit{Jag åkte till Uppsa- Umeå.}
+\end{example}
+
+%\section{vocative}
+
+
+\section{discourse}
+Kategorin \texttt{discourse} används när ett tecken enbart är någon kommentar eller reaktion på diskursnivå, t.ex. \textsc{ja}@b/\textsc{ja}@ub, \textsc{ok}@b, eller \textsc{låt-vara}@g (\ref{ex:discourse}).
+
+\begin{example}
+\label{ex:discourse}
+\begin{dependency}[theme = simple]
+   \begin{deptext}[column sep=1em]
+    \textsc{ja}@b \&  \textsc{pro1} \& \textsc{perf} \& \textsc{läsa} \& \textsc{en} \& \textsc{bok} \\
+   \end{deptext}
+   \deproot{4}{root}
+   \depedge{4}{2}{nsubj}
+   \depedge{4}{1}{discourse}
+   \depedge{4}{3}{aux}
+   \depedge{6}{5}{det}
+   \depedge{4}{6}{dobj}
+   \end{dependency}
+\\
+\textit{Ja, jag har läst en bok.}
+\end{example}
+
+\section{aux}
+Kategorin \texttt{aux} används för hjälpverb till ett huvudverb, som kan vara antingen helt grammatiska (\ref{ex:aux_perf}) eller delvis lexikala (\ref{ex:aux_vill}).\footnote{I UD-dokumentationen verkar det dock som att mer lexikala ''hjälpverb'' aldrig taggas som \texttt{aux}, så vi behöver kanske en tydligare definition här.} För inherent negativa hjälpverb (\ref{ex:aux_neg}) räknar vi det som \texttt{aux} istället för \texttt{neg} (jfr. §\ref{sec:neg}).
+
+\begin{example}
+\label{ex:aux_perf}
+\begin{dependency}[theme = simple]
+   \begin{deptext}[column sep=1em]
+      \textsc{pro1} \& \textsc{perf} \& \textsc{fråga} \& \textsc{objpro}{\textgreater}närv \& \textsc{förut} \\
+   \end{deptext}
+   \deproot{3}{root}
+   \depedge{3}{1}{nsubj}
+   \depedge{3}{2}{aux}
+   \depedge{3}{4}{iobj}
+   \depedge{3}{5}{advmod}
+\end{dependency}
+\\
+\textit{Jag har frågat dig förut.}
+\end{example}
+
+\begin{example}
+\label{ex:aux_vill}
+\begin{dependency}[theme = simple]
+   \begin{deptext}[column sep=1em]
+      \textsc{pro1} \& \textsc{vill} \& \textsc{fråga} \& \textsc{objpro}{\textgreater}närv \& \textsc{en} \& \textsc{sak} \\
+   \end{deptext}
+   \deproot{3}{root}
+   \depedge{3}{1}{nsubj}
+   \depedge{3}{2}{aux}
+   \depedge{3}{4}{iobj}
+   \depedge{6}{5}{det}
+   \depedge{3}{6}{dobj}
+\end{dependency}
+\\
+\textit{Jag vill fråga dig en sak.}
+\end{example}
+
+\begin{example}
+\label{ex:aux_neg}
+\begin{dependency}[theme = simple]
+   \begin{deptext}[column sep=1em]
+      \textsc{pro1} \& \textsc{perf-neg} \& \textsc{äta} \\
+   \end{deptext}
+   \deproot{3}{root}
+   \depedge{3}{1}{nsubj}
+   \depedge{3}{2}{aux}
+\end{dependency}
+\\
+\textit{Jag har inte ätit.}
+\end{example}
+
+\section{cop}
+Kategorin \texttt{cop} används när ett tecken fungerar som kopulaverb, vilket antas kunna hända i tre fall: a) om tecknet \textsc{vara} används (\ref{ex:cop}), b) om tecknet \textsc{pi} används med ett predikativ utan att uttrycka grad (hur mycket) av något (\ref{ex:cop_pi}), och c) om tecknet \textsc{själv} används med ett predikativ (\ref{ex:cop_refl}). I samtliga fall är det predikativet (det som följer kopulan) som räknas som \texttt{root}.
+
+\begin{example}
+\label{ex:cop}
+\begin{dependency}[theme = simple]
+   \begin{deptext}[column sep=1em]
+      \textsc{pro1} \& \textsc{vara} \& \textsc{här} \\
+   \end{deptext}
+   \deproot{3}{root}
+   \depedge{2}{1}{nsubj}
+   \depedge{3}{2}{cop}
+\end{dependency}
+\\
+\textit{Jag är här.} (ofta betonat, eller direktöversatt från svenska)
+\end{example}
+
+\begin{example}
+\label{ex:cop_pi}
+\begin{dependency}[theme = simple]
+   \begin{deptext}[column sep=1em]
+      \textsc{pek} \& \textsc{pi} \& \textsc{hörande} \\
+   \end{deptext}
+   \deproot{3}{root}
+   \depedge{2}{1}{nsubj}
+   \depedge{3}{2}{cop}
+\end{dependency}
+\\
+\textit{Hen är (ju) hörande.}
+\end{example}
+
+\begin{example}
+\label{ex:cop_refl}
+\begin{dependency}[theme = simple]
+   \begin{deptext}[column sep=1em]
+      \textsc{pek} \& \textsc{själv} \& \textsc{döv} \\
+   \end{deptext}
+   \deproot{3}{root}
+   \depedge{2}{1}{nsubj}
+   \depedge{3}{2}{cop}
+\end{dependency}
+\\
+\textit{Hen (som själv) är döv.}
+\end{example}
+
+\section{mark}
+Kategorin \texttt{mark} används när en bisats (dvs. en underordnad sats) inleds med en specifik markör som visar att det är en bisats, som t.ex. tecknet \textsc{om}@b
+i en villkorsbisats (\ref{ex:mark}). Den kopplas alltid till huvudordet i sin sats (dvs. predikatet i bisatsen).
+
+\begin{example}
+\label{ex:mark}
+\begin{dependency}[theme = simple]
+   \begin{deptext}[column sep=1em]
+      \textsc{om}@b \& \textsc{regna} \& \textsc{imorgon} \& \textsc{fut-neg} \& \textsc{komma-dit} \& \textsc{pro1}  \\
+   \end{deptext}
+   \deproot{5}{root}
+   \depedge{5}{6}{nsubj}
+   \depedge{5}{4}{aux}
+   \depedge{5}{2}{advcl}
+   \depedge{2}{1}{mark}
+   \depedge{2}{3}{advmod}
+\end{dependency}
+\\
+\textit{Om det regnar imorgon åker jag inte dit.}
+\end{example}
+
+\section{conj}
+Kategorin \texttt{conj} används för koordinerade element, som kopplas till det första tecknet i koordinationen. Det kan gälla koordinerade substantiv (\ref{ex:conj_noun1}--\ref{ex:conj_noun2}), adjektiv (\ref{ex:conj_adj}), eller verb i verbkedjor (\ref{ex:conj_verb}). En explicit konjunktion (t.ex. \textsc{och}) behöver inte sättas ut, men om den gör det får den etiketten \texttt{cc} (se §\ref{sec:cc}).
+
+\begin{example}
+\label{ex:conj_noun1}
+\begin{dependency}[theme = simple]
+   \begin{deptext}[column sep=1em]
+      \textsc{pro1} \& \textsc{plus} \& \textsc{poss1} \& \textsc{familj} \& \textsc{komma-dit} \& \textsc{ihop} \\
+   \end{deptext}
+   \deproot{5}{root}
+   \depedge{5}{1}{nsubj}
+   \depedge{1}{2}{cc}
+   \depedge{1}{4}{conj}
+   \depedge{4}{3}{case}
+   \depedge{5}{6}{advmod}
+\end{dependency}
+\\
+\textit{Jag och min familj åkte dit tillsammans.}
+\end{example}
+
+\begin{example}
+\label{ex:conj_noun2}
+\begin{dependency}[theme = simple]
+   \begin{deptext}[column sep=1em]
+      \textsc{pro1} \& \textsc{perf} \& \textsc{bo} \& \textsc{sverige} \& \textsc{norge} \& \textsc{finland} \\
+   \end{deptext}
+   \deproot{3}{root}
+   \depedge{3}{1}{nsubj}
+   \depedge{3}{2}{aux}
+   \depedge{3}{4}{nmod}
+   \depedge{4}{5}{conj}
+   \depedge{4}{6}{conj}
+\end{dependency}
+\\
+\textit{Jag har bott i Sverige, Norge och Finland.}
+\end{example}
+
+\begin{example}
+\label{ex:conj_adj}
+\begin{dependency}[theme = simple]
+   \begin{deptext}[column sep=1em]
+      \textsc{pek} \& \textsc{bo} \& \textsc{liten} \& \textsc{röd} \& \textsc{hus} \\
+   \end{deptext}
+   \deproot{2}{root}
+   \depedge{2}{1}{nsubj}
+   \depedge{2}{5}{nmod}
+   \depedge{5}{3}{amod}
+   \depedge{3}{4}{conj}
+\end{dependency}
+\\
+\textit{Hen bor i ett litet rött hus.}
+\end{example}
+
+\begin{example}
+\label{ex:conj_verb}
+\begin{dependency}[theme = simple]
+   \begin{deptext}[column sep=1em]
+      \textsc{pro1} \& \textsc{perf} \& \textsc{städa} \& \textsc{diska} \& \textsc{handla} \& \textsc{mat} \\
+   \end{deptext}
+   \deproot{3}{root}
+   \depedge{3}{1}{nsubj}
+   \depedge{3}{2}{aux}
+   \depedge{3}{4}{conj}
+   \depedge{3}{5}{conj}
+   \depedge{5}{6}{dobj}
+\end{dependency}
+\\
+\textit{Jag har städat, diskat och handlat mat.}
+\end{example}
+
+\section{cc}
+\label{sec:cc}
+Kategorin \texttt{cc} används för explicita konjunktioner som samordnar olika element. För svenskt teckenspråk bör detta gissningsvis mest förekomma bland koordinerade substantiv, och borde främst representeras av tecknen \textsc{och} (\ref{ex:cc_och} och \textsc{plus} (\ref{ex:cc_plus}).
+
+\begin{example}
+\label{ex:cc_och}
+\begin{dependency}[theme = simple]
+   \begin{deptext}[column sep=1em]
+      \textsc{finns} \& \textsc{kaffe} \& \textsc{och} \& \textsc{te}@b \\
+   \end{deptext}
+   \deproot{1}{root}
+   \depedge{1}{2}{nsubj}
+   \depedge{2}{3}{cc}
+   \depedge{2}{4}{conj}
+\end{dependency}
+\\
+\textit{Det finns kaffe och te.}
+\end{example}
+
+\begin{example}
+\label{ex:cc_plus}
+\begin{dependency}[theme = simple]
+   \begin{deptext}[column sep=1em]
+      \textsc{pro1} \& \textsc{plus} \& \textsc{poss1} \& \textsc{familj} \& \textsc{komma-dit} \& \textsc{ihop} \\
+   \end{deptext}
+   \deproot{5}{root}
+   \depedge{5}{1}{nsubj}
+   \depedge{1}{2}{cc}
+   \depedge{1}{4}{conj}
+   \depedge{4}{3}{case}
+   \depedge{5}{6}{advmod}
+\end{dependency}
+\\
+\textit{Jag och min familj åkte dit tillsammans.}
+\end{example}
+
+
+\section{dep}
+Kategorin \texttt{dep} används för relationer som inte går att bestämma, när vi inte vet ännu vad vi ska göra med den, eller att vi helt enkelt inte kan definiera någon relation. För närvarande används denna etikett för a) teckenfragment som är annoterade med \texttt{@hd}, b) obestämda glosor som vi inte kan veta vad de är som är annoterade med \texttt{@z} eller \texttt{@x}, samt c) tecken som är glossade men som vi inte kan veta hur vi ska annotera som en dependensrelation.
+
+
+
+
+
+
+
+
+
+
+
+
+%\begin{example}
+%\label{ex:xxx}
+%\begin{dependency}[theme = simple]
+%   \begin{deptext}[column sep=1em]
+%      A \& hearing \& is \& scheduled \& on \& the \& issue \& today \& . \\
+%   \end{deptext}
+%   \deproot{3}{ROOT}
+%   \depedge{2}{1}{ATT}
+%   \depedge[edge start x offset=-6pt]{2}{5}{ATT}
+%   \depedge{3}{2}{SBJ}
+%   \depedge{3}{9}{PU}
+%   \depedge{3}{4}{VC}
+%   \depedge{4}{8}{TMP}
+%   \depedge{5}{7}{PC}
+%   \depedge[arc angle=50]{7}{6}{ATT}
+%\end{dependency}
+%\end{example}
+
+\end{document}
