@@ -1,8 +1,13 @@
 import re
 import sys
+import os
 from collections import defaultdict
 
 from pympi import Elan
+
+with open(os.path.join(os.path.dirname(sys.argv[0]), 'gestures_pos.txt'),
+          'r', encoding='utf-8') as f:
+    GESTURES_POS = dict(line.split() for line in f if len(line.split()) == 2)
 
 RE_GLOSS = re.compile(r'(.+)\[([^\]]+)\]$')
 
@@ -35,13 +40,15 @@ def convert(filename):
 
     utts = []
 
-    def translate_pos(pos, dep):
+    def translate_pos(pos, dep, gloss):
         if '?' in pos:
             print('Warning: removing ? from "%s"' % pos, file=sys.stderr)
             pos = pos.replace('?', '')
         elif pos not in POS_TABLE:
             print('Warning: unknown PoS tag "%s"' % pos, file=sys.stderr)
         if pos[:2] == 'VB': return 'VERB'
+        if pos == 'G':
+            return GESTURES_POS.get(gloss+'[G]', 'X')
         if pos == 'PEK':
             return 'DET' if dep == 'det' else 'PRON'
         return POS_TABLE.get(pos, 'X')
@@ -53,7 +60,7 @@ def convert(filename):
             return [str(sign['index']-base+1),
                     sign['gloss'],
                     '_',
-                    translate_pos(sign['pos'], sign['dep']),
+                    translate_pos(sign['pos'], sign['dep'], sign['gloss']),
                     sign['pos'],
                     '_',
                     str(0 if sign['head'] == 0 else sign['head']-base+1),
