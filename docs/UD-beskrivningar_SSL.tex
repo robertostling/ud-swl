@@ -74,7 +74,7 @@ Kategorin \texttt{nsubj} används för både lexikala (\ref{ex:nsubj_lex}) och p
    \end{deptext}
    \deproot{3}{root}
    \depedge{3}{2}{nsubj}
-   \depedge{2}{1}{case}
+   \depedge{2}{1}{nmod:poss}
 \end{dependency}
 \\
 \textit{Min bror är döv.}
@@ -246,7 +246,7 @@ Kategorin \texttt{appos} används när ett substantiv direkt refererar till ett 
    \end{deptext}
    \deproot{4}{root}
    \depedge{4}{1}{nsubj}
-   \depedge{3}{2}{case}
+   \depedge{3}{2}{nmod:poss}
    \depedge{1}{3}{appos}
 \end{dependency}
 \\
@@ -255,22 +255,21 @@ Kategorin \texttt{appos} används när ett substantiv direkt refererar till ett 
 
 \section{nmod}
 \label{sec:nmod}
-Kategorin \texttt{nmod} används för substantiv som modifierar ett annat ord (\ref{ex:nmod}), eller undantagsvis för objekt som uttrycks med en preposition före (\ref{ex:nmod_obj}).
+Kategorin \texttt{nmod} används för substantiv som modifierar ett annat ord (\ref{ex:nmod}), eller undantagsvis för objekt som uttrycks med en preposition före (\ref{ex:nmod_obj}). För possessiva attribut, se §\ref{subsec:nmod:poss}.
 
 \begin{example}
 \label{ex:nmod}
 \begin{dependency}[theme = simple]
    \begin{deptext}[column sep=1em]
-      \textsc{sverige} \& \textsc{poss} \& \textsc{kung} \& \textsc{komma-dit} \& \textsc{imorgon} \\
+      \textsc{restaurang} \& \textsc{pek} \& \textsc{gamla{\string^}stan} \& \textsc{bra} \\
    \end{deptext}
    \deproot{4}{root}
    \depedge{4}{3}{nsubj}
    \depedge{3}{1}{nmod}
-   \depedge{1}{2}{case}
-   \depedge{4}{5}{advmod}
+   \depedge{1}{2}{det}
 \end{dependency}
 \\
-\textit{Sveriges kung åker dit imorgon.}
+\textit{(Den där) restaurangen i Gamla stan är bra.}
 \end{example}
 
 \begin{example}
@@ -288,6 +287,40 @@ Kategorin \texttt{nmod} används för substantiv som modifierar ett annat ord (\
 \end{dependency}
 \\
 \textit{Mannen skickade ett brev till mig.}
+\end{example}
+
+\subsection{nmod:poss}
+\label{subsec:nmod:poss}
+Underkategorin \texttt{nmod:poss} används för possessiv-/genitivattribut till ett substantiv. Om possessivmarkören används tillsammans med ett lexikalt substantiv får det lexikala substantivet taggen \texttt{nmod:poss} medan possessivmarkören taggas som \texttt{case} (\ref{ex:nmod:poss_noun}). Om possessivmarkören fungerar pronominellt får den istället själv taggen \texttt{nmod:poss} (\ref{ex:nmod:poss_poss}).
+
+\begin{example}
+\label{ex:nmod:poss_noun}
+\begin{dependency}[theme = simple]
+   \begin{deptext}[column sep=1em]
+      \textsc{sverige} \& \textsc{poss} \& \textsc{kung} \& \textsc{komma-dit} \& \textsc{imorgon} \\
+   \end{deptext}
+   \deproot{4}{root}
+   \depedge{4}{3}{nsubj}
+   \depedge{3}{1}{nmod:poss}
+   \depedge{1}{2}{case}
+   \depedge{4}{5}{advmod}
+\end{dependency}
+\\
+\textit{Sveriges kung åker dit imorgon.}
+\end{example}
+
+\begin{example}
+\label{ex:nmod:poss_poss}
+\begin{dependency}[theme = simple]
+   \begin{deptext}[column sep=1em]
+      \textsc{poss1} \& \textsc{bror} \& \textsc{döv} \\
+   \end{deptext}
+   \deproot{3}{root}
+   \depedge{3}{2}{nsubj}
+   \depedge{2}{1}{nmod:poss}
+\end{dependency}
+\\
+\textit{Min bror är döv.}
 \end{example}
 
 \section{acl}
@@ -400,10 +433,10 @@ Kategorin \texttt{neg} används för negationstecken (obs, endast manuella såda
    \depedge{2}{3}{nsubj}
 \end{dependency}
 \\
-\textit{Jag är döv.}
+\textit{Jag är inte döv.}
 \end{example}
 
-\noindent Notera att inherent negativa tecken med annan funktion \textit{inte} annoteras som \texttt{neg}, t.ex. negativa hjälpverb (\ref{ex:perf-neg}) eller negativa adverb (\ref{ex:neg_adv}).\footnote{Kolla upp hur detta faktiskt görs i andra UD-språk. Jag skulle kunna se en idé i att låta dessa vara språkspecifika underkategorier, t.ex. \texttt{aux:neg} respektive \texttt{advmod:neg}, eller liknande.}
+\noindent Notera att inherent negativa tecken med annan funktion \textit{inte} annoteras som \texttt{neg}, t.ex. negativa hjälpverb (\ref{ex:perf-neg}) eller negativa adverb (\ref{ex:neg_adv}).\footnote{Det verkar som att andra språk gör på samma sätt (t.ex. finska, med sitt negativa hjälpverb \textit{ei} (\textsc{neg.3sg})). Negationskomponenten bör kunna tas med i morfologiska specifikationen i \texttt{.conllu}-filen.}
 
 \begin{example}
 \label{ex:perf-neg}
@@ -435,7 +468,7 @@ Kategorin \texttt{neg} används för negationstecken (obs, endast manuella såda
 \end{example}
 
 \section{case}
-Kategorin \texttt{case} används när det finns en uttryckt preposition i meningen (\ref{ex:case_obj}).
+Kategorin \texttt{case} används när det finns en uttryckt preposition i meningen (\ref{ex:case_obj}) eller när possessivmarkören \textsc{poss} används tillsammans med ett lexikalt substantiv (\ref{ex:case_poss}).
 
 \begin{example}
 \label{ex:case_obj}
@@ -452,6 +485,22 @@ Kategorin \texttt{case} används när det finns en uttryckt preposition i mening
 \end{dependency}
 \\
 \textit{Mannen skickade ett brev till mig.}
+\end{example}
+
+\begin{example}
+\label{ex:case_poss}
+\begin{dependency}[theme = simple]
+   \begin{deptext}[column sep=1em]
+      \textsc{sverige} \& \textsc{poss} \& \textsc{kung} \& \textsc{komma-dit} \& \textsc{imorgon} \\
+   \end{deptext}
+   \deproot{4}{root}
+   \depedge{4}{3}{nsubj}
+   \depedge{3}{1}{nmod:poss}
+   \depedge{1}{2}{case}
+   \depedge{4}{5}{advmod}
+\end{dependency}
+\\
+\textit{Sveriges kung åker dit imorgon.}
 \end{example}
 
 \section{advcl}
@@ -736,7 +785,7 @@ Kategorin \texttt{conj} används för koordinerade element, som kopplas till det
    \depedge{5}{1}{nsubj}
    \depedge{1}{2}{cc}
    \depedge{1}{4}{conj}
-   \depedge{4}{3}{case}
+   \depedge{4}{3}{nmod:poss}
    \depedge{5}{6}{advmod}
 \end{dependency}
 \\
@@ -822,13 +871,32 @@ Kategorin \texttt{cc} används för explicita konjunktioner som samordnar olika 
    \depedge{5}{1}{nsubj}
    \depedge{1}{2}{cc}
    \depedge{1}{4}{conj}
-   \depedge{4}{3}{case}
+   \depedge{4}{3}{nmod:poss}
    \depedge{5}{6}{advmod}
 \end{dependency}
 \\
 \textit{Jag och min familj åkte dit tillsammans.}
 \end{example}
 
+
+\section{dislocated}
+Kategorin \texttt{dislocated} används för element som förekommer \textit{utanför} sin vanliga syntaktiska position men som samtidigt har samma funktion som ett annat tecken som står i sin vanliga position. Detta kommer främst att gälla pronominella pekningar som upprepas i en mening, där den första förekomsten taggas enligt sin faktiska funktion, medan upprepningarna räknas som \texttt{dislocated} och kopplas till samma huvud som första förekomsten (\ref{ex:dislocated}).
+
+\begin{example}
+\label{ex:dislocated}
+\begin{dependency}[theme = simple]
+   \begin{deptext}[column sep=1em]
+      \textsc{pro1} \& \textsc{perf} \& \textsc{handla} \& \textsc{mat} \& \textsc{pro1} \\
+   \end{deptext}
+   \deproot{3}{root}
+   \depedge{3}{1}{nsubj}
+   \depedge{3}{2}{aux}
+   \depedge{3}{4}{dobj}
+   \depedge{3}{5}{dislocated}
+\end{dependency}
+\\
+\textit{Jag har handlat mat (jag).}
+\end{example}
 
 \section{dep}
 Kategorin \texttt{dep} används för relationer som inte går att bestämma, när vi inte vet ännu vad vi ska göra med den, eller att vi helt enkelt inte kan definiera någon relation. För närvarande används denna etikett för a) teckenfragment som är annoterade med \texttt{@hd}, b) obestämda glosor som vi inte kan veta vad de är som är annoterade med \texttt{@z} eller \texttt{@x}, samt c) tecken som är glossade men som vi inte kan veta hur vi ska annotera som en dependensrelation.
