@@ -10,7 +10,7 @@ POS_TABLE = {
         'AB':       'ADV',
         'INTERJ':   'INTJ',
         'NN':       'NOUN',
-        'NNKL':     'X',
+        'NNKL':     'NOUN',
         'PN':       'PRON',
         'JJ':       'ADJ',
         'PP':       'ADP',
@@ -35,10 +35,15 @@ def convert(filename):
 
     utts = []
 
-    def translate_pos(pos):
-        if pos not in POS_TABLE:
+    def translate_pos(pos, dep):
+        if '?' in pos:
+            print('Warning: removing ? from "%s"' % pos, file=sys.stderr)
+            pos = pos.replace('?', '')
+        elif pos not in POS_TABLE:
             print('Warning: unknown PoS tag "%s"' % pos, file=sys.stderr)
         if pos[:2] == 'VB': return 'VERB'
+        if pos == 'PEK':
+            return 'DET' if dep == 'det' else 'PRON'
         return POS_TABLE.get(pos, 'X')
 
     def utt_to_conllu(utt):
@@ -48,7 +53,7 @@ def convert(filename):
             return [str(sign['index']-base+1),
                     sign['gloss'],
                     '_',
-                    translate_pos(sign['pos']),
+                    translate_pos(sign['pos'], sign['dep']),
                     sign['pos'],
                     '_',
                     str(0 if sign['head'] == 0 else sign['head']-base+1),
@@ -92,6 +97,8 @@ def convert(filename):
 
         for hand, t0, t1, dep, gloss in ann_dep:
             if dep:
+                # hack to fix typo
+                if dep == 'reparandium': dep = 'reparandum'
                 slots[(t0, t1)]['dep'] = dep
 
         children = defaultdict(list)
@@ -122,11 +129,12 @@ def convert(filename):
             utt = get_flat_tree(root['index'])
             utt.sort(key=lambda sign: sign['index'])
             indexes = [sign['index'] for sign in utt]
-            if not indexes == list(range(min(indexes), max(indexes)+1)):
+            if indexes == list(range(min(indexes), max(indexes)+1)):
+                utts.append(utt)
+            else:
                 print('Warning: gaps in tree at %d!' % utt[0]['index'],
                       file=sys.stderr)
 
-            utts.append(utt)
 
     print('%d trees, %d signs' % (len(roots), len(signs)), file=sys.stderr)
 
