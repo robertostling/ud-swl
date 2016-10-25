@@ -150,8 +150,11 @@ def convert(filename):
                       file=sys.stderr)
 
 
-    print('%d trees, %d signs' % (len(roots), len(signs)), file=sys.stderr)
+        #print('%d trees, %d signs' % (len(roots), len(signs)), file=sys.stderr)
 
+    print('%s: %d trees with %d signs' % (
+        filename, len(utts), sum(map(len, utts))),
+        file=sys.stderr)
     return [utt_to_conllu(utt) for utt in utts]
 
 
