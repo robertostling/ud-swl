@@ -19,6 +19,7 @@ POS_TABLE = {
         'PN':       'PRON',
         'JJ':       'ADJ',
         'PP':       'ADP',
+        'KN':       'CONJ',
         'RG':       'NUM',
         'VB':       'VERB',
         'VBS':      'VERB',
