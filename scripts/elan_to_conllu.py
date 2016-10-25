@@ -89,32 +89,32 @@ def convert(filename):
 
         for hand, t0, t1, i, gloss_pos in ann_index:
             try:
-                slots[(t0, t1)]['index'] = int(i)
+                slots[(hand, t0, t1)]['index'] = int(i)
             except ValueError:
                 print('Warning: invalid index "%s"' % i, file=sys.stderr)
             gloss, pos = parse_gloss(gloss_pos)
-            slots[(t0, t1)]['gloss'] = gloss
-            slots[(t0, t1)]['pos'] = pos
-            slots[(t0, t1)]['t0'] = t0
+            slots[(hand, t0, t1)]['gloss'] = gloss
+            slots[(hand, t0, t1)]['pos'] = pos
+            slots[(hand, t0, t1)]['t0'] = t0
 
         for hand, t0, t1, i, gloss in ann_head:
             try:
-                slots[(t0, t1)]['head'] = int(i)
+                slots[(hand, t0, t1)]['head'] = int(i)
             except ValueError:
                 print('Warning: invalid head "%s" at index %d' % (
-                    i, slots[(t0, t1)]['index']), file=sys.stderr)
+                    i, slots[(hand, t0, t1)]['index']), file=sys.stderr)
 
         for hand, t0, t1, dep, gloss in ann_dep:
             if dep:
                 # hack to fix typo
                 if dep == 'reparandium': dep = 'reparandum'
-                slots[(t0, t1)]['dep'] = dep
+                slots[(hand, t0, t1)]['dep'] = dep
 
         children = defaultdict(list)
         signs = {}
         roots = []
 
-        for (t0, t1), sign in slots.items():
+        for (hand, t0, t1), sign in slots.items():
             try:
                 index = sign['index']
                 dep = sign['dep']
