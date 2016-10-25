@@ -101,7 +101,8 @@ def convert(filename):
             try:
                 slots[(t0, t1)]['head'] = int(i)
             except ValueError:
-                print('Warning: invalid head "%s"' % i, file=sys.stderr)
+                print('Warning: invalid head "%s" at index %d' % (
+                    i, slots[(t0, t1)]['index']), file=sys.stderr)
 
         for hand, t0, t1, dep, gloss in ann_dep:
             if dep:
@@ -137,10 +138,15 @@ def convert(filename):
             utt = get_flat_tree(root['index'])
             utt.sort(key=lambda sign: sign['index'])
             indexes = [sign['index'] for sign in utt]
-            if indexes == list(range(min(indexes), max(indexes)+1)):
+            expected = set(range(min(indexes), max(indexes)+1))
+            missing = expected - set(indexes)
+            if not missing:
                 utts.append(utt)
             else:
-                print('Warning: gaps in tree at %d!' % utt[0]['index'],
+                print('Warning: signs %d and %d are connected to each other'
+                      ' but not to the following signs between them: %s' % (
+                          min(indexes), max(indexes),
+                          ', '.join(map(str, sorted(missing)))),
                       file=sys.stderr)
 
 
