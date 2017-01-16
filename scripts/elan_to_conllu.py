@@ -140,14 +140,30 @@ def convert(filename):
             indexes = [sign['index'] for sign in utt]
             expected = set(range(min(indexes), max(indexes)+1))
             missing = expected - set(indexes)
-            if not missing:
-                utts.append(utt)
-            else:
+            root_nonzero = [
+                    sign for sign in utt
+                    if sign['dep'] == 'root' and sign['head'] != 0]
+            nonroot_zero = [
+                    sign for sign in utt
+                    if sign['dep'] != 'root' and sign['head'] == 0]
+
+            for sign in root_nonzero:
+                print('Warning: sign %d is "root" but has index %d' % (
+                    sign['index'], sign['head']),
+                    file=sys.stderr)
+            for sign in nonroot_zero:
+                print('Warning: sign %d is "%s" but has index 0' % (
+                    sign['index'], sign['dep']),
+                    file=sys.stderr)
+            if missing:
                 print('Warning: signs %d and %d are connected to each other'
                       ' but not to the following signs between them: %s' % (
                           min(indexes), max(indexes),
                           ', '.join(map(str, sorted(missing)))),
                       file=sys.stderr)
+            if missing or root_nonzero or nonroot_zero:
+                continue
+            utts.append(utt)
 
 
         #print('%d trees, %d signs' % (len(roots), len(signs)), file=sys.stderr)

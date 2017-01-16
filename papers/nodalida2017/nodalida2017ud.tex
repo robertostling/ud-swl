@@ -1,0 +1,113 @@
+%
+% File nodalida2017.tex
+%
+% Contact beata.megyesi@lingfil.uu.se
+%
+% Based on the instruction file for Nodalida 2015 and EACL 2014
+% which in turn was based on the instruction files for previous 
+% ACL and EACL conferences.
+
+\documentclass[11pt]{article}
+\usepackage{nodalida2017}
+%\usepackage{times}
+\usepackage{mathptmx}
+%\usepackage{txfonts}
+\usepackage{url}
+\usepackage{latexsym}
+\special{papersize=210mm,297mm} % to avoid having to use "-t a4" with dvips 
+%\setlength\titlebox{6.5cm}  % You can expand the title box if you really have to
+
+\title{Universal Dependencies for Swedish Sign Language}
+
+\author{First Author \\
+  Affiliation / Address line 1 \\
+  Affiliation / Address line 2 \\
+  Affiliation / Address line 3 \\
+  {\tt email@domain} \\\And
+  Second Author \\
+  Affiliation / Address line 1 \\
+  Affiliation / Address line 2 \\
+  Affiliation / Address line 3 \\
+  {\tt email@domain} \\}
+
+\date{}
+
+\begin{document}
+\maketitle
+\begin{abstract}
+    We describe the first effort to annotate a signed lanugage with syntactic
+    dependency structure: the Swedish Sign Language portion of the
+    Universal Dependencies treebanks. This is significant because the
+    visual modality presents some unique challenges in analysis and
+    annotation, such as the possibility of
+    both hands articulating separate signs simultaneously.
+    Our data is sourced from the Swedish Sign Language Corpus,
+    and if used in conjunction these resources contain very richly
+    annotated data: beyond syntactic annotations there are video files,
+    a parallel text in written Swedish, signer metadata,
+    and a variety of other annotations.
+\end{abstract}
+
+\section{Introduction}
+
+The Universal Dependencies (UD) project \cite{Nivre2016ud} 
+has produced an extensible but at its core language-independent standard for
+morphological and syntactic annotation. This has been applied to the Universal
+Dependencies treebanks \cite{ud14}, which in its latest release at the time of
+writing (version 1.4) contains 64 treebanks in 47 languages---one of which is
+Swedish Sign Language (SSL, ISO 639-3: \textsc{swl}), the topic of this
+article.
+
+
+\section{Universal Dependencies}
+
+The Universal Dependencies project aims to provide uniform morphological and
+syntactic (in the form of dependency trees) annotations across languages
+\cite{Nivre2016ud}.\footnote{Note that our work predates version 2 of the UD
+guidelines, and is based on the first version.}
+Built on a language-universal common core of 17 parts of speech and
+40 dependency relations, there are also language-specific guidelines which
+interpret and when necessary extend those in the context of a given language.
+
+\section{Swedish Sign Language}
+
+Swedish Sign Language is ...
+
+\section{Data source}
+
+SSLC is ...
+% TODO: se slutet av abstract, ge gärna några fler detaljer här och synka med
+% abstract (= fixa mina misstag) om det behövs
+
+\section{Annotation principles for SSL}
+
+...
+% TODO: sammanfatta de viktigaste språkspecifika fenomenen,
+% gärna några exempelträd
+
+\section{Treebank statistics}
+
+The UD SSL treebank contains X trees with a total of Y sign tokens.
+
+% TODO: någon rolig liten undersökning? Ordföljd?
+
+\section{Conclusions and future work}
+
+In releasing the Universal Dependencies treebank of Swedish Sign Language
+(SSL), the first such resource for a signed language,
+we hope to enable new computational research into sign language syntax.
+We also hope to stimulate the development of Natural
+Language Processing (NLP) tools capable of processing sign languages.
+Finally, because we have both parallel data in Swedish and language-independent
+syntactic annotations, we also believe this resource could prove particularly
+useful in cross-lingual NLP.
+
+
+%\section*{Acknowledgments}
+%
+% We wish to thank ...
+
+\bibliographystyle{acl}
+\bibliography{nodalida2017ud}
+
+\end{document}

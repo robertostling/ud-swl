@@ -12,6 +12,10 @@ python3 $SCRIPTDIR/elan_to_conllu.py \
     "$DATADIR"/SSLC02_409_UD_CB_proofed.eaf \
     >>"$DESTDIR"/swl-ud-train.conllu
 
+python3 $SCRIPTDIR/elan_to_conllu.py \
+    "$DATADIR"/SSLC01_391_UD_MG_161027.eaf \
+    >>"$DESTDIR"/swl-ud-train.conllu
+
 echo "----------------------------------------------------------------"
 
 echo "Converting dev set..."
@@ -29,7 +33,7 @@ echo "Converting test set..."
 echo -n >"$DESTDIR"/swl-ud-test.conllu
 
 python3 $SCRIPTDIR/elan_to_conllu.py \
-    "$DATADIR"/SSLC02_331_UD_MG_161024_CB_proofed.eaf \
+    "$DATADIR"/SSLC02_331_UD_CB_proofed.eaf \
     >>"$DESTDIR"/swl-ud-test.conllu
 
 echo "----------------------------------------------------------------"
