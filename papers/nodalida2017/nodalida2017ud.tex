@@ -14,6 +14,7 @@
 %\usepackage{txfonts}
 \usepackage{url}
 \usepackage{latexsym}
+\usepackage{tikz-dependency}
 \special{papersize=210mm,297mm} % to avoid having to use "-t a4" with dvips 
 %\setlength\titlebox{6.5cm}  % You can expand the title box if you really have to
 
@@ -35,7 +36,7 @@
 \begin{document}
 \maketitle
 \begin{abstract}
-    We describe the first effort to annotate a signed lanugage with syntactic
+    We describe the first effort to annotate a signed language with syntactic
     dependency structure: the Swedish Sign Language portion of the
     Universal Dependencies treebanks. This is significant because the
     visual modality presents some unique challenges in analysis and
@@ -71,17 +72,38 @@ interpret and when necessary extend those in the context of a given language.
 
 \section{Swedish Sign Language}
 
-Swedish Sign Language is ...
+Swedish Sign Language (SSL) is the main sign language of the Swedish Deaf community.\footnote{Capital D ``Deaf'' is generally used to refer to the language community as a cultural and linguistic group, rather than `deaf' as a medical label.} It is estimated to be used by at least 10,000 as one of their primary languages, and is the only sign language to be recognized in Swedish law, giving it a special status alongside the official minority languages \cite{Ahlgren2006sou,Parkvall2015siffror}. The history of SSL goes back at least 200 years, since the inauguration of the first Deaf school in Sweden, and has influenced the two sign languages of Finland---Finnish Sign Language and Finland-Swedish Sign Language---with which SSL can be said to be related \cite{Bergman2010transmission}.
 
 \section{Data source}
 
-SSLC is ...
+The SSL Corpus Project ran during the years 2009--2011 with the intention to establish the first systematically designed and publicly available corpus of SSL, resulting in the SSL Corpus (SSLC). Approximately 24 hours of video data of dyadic signing was recorded, comprising 42 signers of different age, gender, and geographical background, spanning 300 individual video files \cite{Mesch2012signed}. The translation and annotation work is still on-going, with new releases being available online as the work moves forward. The last official release of the SSLC includes just under 7 hours of video data \cite{Mesch2012dataset} along with annotation files containing 53,625 sign tokens across 6,197 sign types \cite{Mesch2016annotated}. 
+
+The corpus is annotated using the ELAN software \cite{Wittenburg2006elan}, and the annotation files are distributed in the corresponding XML-based \texttt{.eaf} format. Each annotation file contains tiers on which annotations are aligned with the a video file, both video and annotation tiers being visible in the ELAN interface [insert figure?]. The SSLC annotation files currently include tiers for sign glosses, and others for Swedish translations. Sign glosses are written word labels that represent signs with approximate meanings (e.g. \textsc{pro1} for a first person pronoun). The sign gloss annotation tiers are thus segmented for lexical items (i.e.~individual signs), and come in pairs for each signer---each tier representing one of the signer's hands \cite{Mesch2015gloss}. Sign glosses also contain a part-of-speech (PoS) tag based on a semi-automatic method with full manual correction---e.g.~\textsc{pro1[pn]} \cite{Ostling2015enriching}. The translation tier is segmented into longer chunks, representing stretches of discourse that can be represented by an idiomatic Swedish translation. However, the translation segmentations do not represent clausal boundaries in neither SSL nor Swedish \cite{Borstell2014segmenting}. More recently, a portion of the SSLC was segmented into clausal units and annotated for basic syntactic roles \cite{Borstell2016syntactic}, which led to the current UD annotation work.
 % TODO: se slutet av abstract, ge gärna några fler detaljer här och synka med
 % abstract (= fixa mina misstag) om det behövs
+% Gärna någon figur som visar gränssnittet och annoteringsraderna i ELAN
 
-\section{Annotation principles for SSL}
+\section{Annotation procedure and principles for SSL}
 
-...
+The annotation of UD based syntactic structure started by coming up with a procedure for annotating a signed language using ELAN. Signed language is more simultaneous than spoken language, particularly in the use of paired parallel articulators in form of the signer's two hands \cite{Vermeerbergen2007simultaneity}. Because of this, and because the sign gloss annotation tiers are separate for the individual hands, we had to include one set of annotation tiers for each hand (i.e.~two per signer, or four per annotation file). We came up with an alignment system that combined the alignment with sign annotations and the linking of dependency relations between signs. Each tier set consisted of three tiers: \texttt{Index}; \texttt{Link}; and \texttt{UD}. The three tiers were generated using [technical stuff], creating dependent tiers to the sign gloss tiers. On the \texttt{Index} tier, each sign was assigned an integer based on its chronological position in the file (in case of overlapping signs, the onset was given precedence, or the dominant hand if onsets were identical)---this was done using a script iterating over all annotation files. On the \texttt{Link} tier, the index of the sign on which the sign was dependent was entered into each annotation cell. Lastly, on the \texttt{UD} tier, the dependency relation of a sign was entered into its annotation cell. Later, a custom script extracted this manually annotated data, and converted it into the CoNLL format [and converted the PoS tags into UD categories?].
+
+\begin{figure*}
+\begin{dependency}[theme = simple]
+   \begin{deptext}[column sep=1em]
+      \texttt{verb} \& \texttt{verb} \& \texttt{verb} \& \texttt{noun} \& \texttt{det} \& \texttt{verb} \\
+      \textsc{sätta-sig} \& \textsc{äta}(Q) \& \textsc{titta-på} \& \textsc{snö{\string^}gubbe} \& \textsc{pek} \& \textsc{äta}(Q) \\
+      \textsc{sit-down} \& \textsc{eat}(Q) \& \textsc{look-at} \& \textsc{snow{\string^}old-man} \& \textsc{point} \& \textsc{eat}(Q) \\
+   \end{deptext}
+   \deproot{1}{root}
+   \depedge{1}{2}{conj}
+   \depedge{1}{3}{conj}
+   \depedge{3}{4}{dobj}
+   \depedge{4}{5}{det}
+   \depedge[arc angle=50]{2}{6}{conj}
+\end{dependency}
+\caption{A PoS and dependency tagged sentence from the SSLC.}
+\label{fig:ssl_dep}
+\end{figure*}
 % TODO: sammanfatta de viktigaste språkspecifika fenomenen,
 % gärna några exempelträd
 
