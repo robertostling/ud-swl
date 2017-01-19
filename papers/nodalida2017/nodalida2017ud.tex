@@ -39,23 +39,24 @@
 \begin{abstract}
     We describe the first effort to annotate a signed language with syntactic
     dependency structure: the Swedish Sign Language portion of the
-    Universal Dependencies treebanks. This is significant because the
-    visual modality presents some unique challenges in analysis and
+    Universal Dependencies treebanks.
+    The visual modality presents some unique challenges in analysis and
     annotation, such as the possibility of
     both hands articulating separate signs simultaneously, which has
     implications for the central concept of \emph{projectivity}.
     Our data is sourced from the Swedish Sign Language Corpus,
     and if used in conjunction these resources contain very richly
-    annotated data: beyond syntactic annotations there are video files,
-    a parallel text in written Swedish, signer metadata,
-    and a variety of other annotations.
+    annotated data: dependency structure and parts of speech,
+    video recordings, signer metadata, and because the whole material is
+    also translated into Swedish the corpus is also a parallel text.
 \end{abstract}
 
 \section{Introduction}
 
 The Universal Dependencies (UD) project \cite{Nivre2016ud} 
-has produced an extensible but at its core language-independent standard for
-morphological and syntactic annotation. This has been applied to the Universal
+has produced a language-independent but extensible standard for
+morphological and syntactic annotation using a formalism based on
+dependency grammar. This stanard has been used to create the Universal
 Dependencies treebanks \cite{ud14}, which in its latest release at the time of
 writing (version 1.4) contains 64 treebanks in 47 languages---one of which is
 Swedish Sign Language (SSL, ISO 639-3: \textsc{swl}), the topic of this
@@ -99,13 +100,11 @@ files of our source material from the SSLC project (see
 converted to the CoNLL-U format used by Universal Dependencies.
 
 The annotation of UD based syntactic structure started by coming up with a procedure for annotating a signed language using ELAN. Signed language is more simultaneous than spoken language, particularly in the use of paired parallel articulators in form of the signer's two hands \cite{Vermeerbergen2007simultaneity}.
-
 We handle this by allowing signs from both hands into the same tree structure,
 which leads to well-formed trees consistent with the dependency grammar
 formalism's single-head, connectedness and acyclicity constraints.
 These trees can however have some unusual properties compared to spoken
 languages.
-
 For the purpose of conforming to the CoNLL-U data format,
 which requires an ordered sequence of tokens, we sort
 signs by onset time and break ties in favor of signs articulated by the
@@ -114,12 +113,14 @@ This working definition is by no means the only reasonable linearization,
 which means that the notion of projectivity to some extent loses its meaning.
 A tree can be considered projective or non-projective depending on how the
 ordering of simultaneously articulated signs is defined---assuming one wants
-such an ordering in the first place.
-% TODO: har vi något autentiskt exempel på detta? Annars är trädet vi har nu
-% i figur 2 rätt bra, eftersom det är "nästan" projektivt och blir det om man
-% byter plats på ÄTA och TITTA-PÅ
+to impose such an ordering in the first place.
+Consider the example in \Fref{fig:ssl_dep}, which is non-projective
+due to the link between the two instances of \textsc{eat},
+but exchanging the order of \textsc{eat} and \textsc{look-at} would
+give us a projective tree.
+% TODO: har vi något bättre exempel på detta? 
 
-Because the source material contains no annotated units above the sign level,
+Because the source material contains no segmentation above the sign level,
 we decided to annotate dependency annotation bottom-up. Segment boundaries
 then occur at the points where the annotator has chosen not to join subtrees.
 % TODO: har vi mer att säga om det här?
