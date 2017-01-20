@@ -143,11 +143,15 @@ which means that the notion of projectivity to some extent loses its meaning.
 A tree can be considered projective or non-projective depending on how the
 ordering of simultaneously articulated signs is defined---assuming one wants
 to impose such an ordering in the first place.
-Consider the example in \Fref{fig:ssl_dep}, which is non-projective
-due to the link between the two instances of \textsc{eat},
-but exchanging the order of \textsc{eat} and \textsc{look-at} would
-give us a projective tree.
-% TODO: har vi något bättre exempel på detta? 
+An alternative to adapting the sign language data to fit the formalism,
+as we have done in order to meet the requirements of the UD standards,
+is obviously to construct a formalism adapted specifically to sign languages.
+This is the path chosen by \newcite{Dubot2014ahybrid} in their parsing
+experiments.
+%Consider the example in \Fref{fig:ssl_dep}, which is non-projective
+%due to the link between the two instances of \textsc{eat},
+%but exchanging the order of \textsc{eat} and \textsc{look-at} would
+%give us a projective tree.
 
 Because the source material contains no segmentation above the sign level,
 we decided to use a bottom-up annotation procedure where subtrees were
@@ -178,7 +182,12 @@ written language, Swedish, has mean and median sentence lengths of 16.1 and
 14, although that includes punctuation which is not present in the SSL
 treebank.
 
-% TODO: någon rolig liten undersökning?
+\section{Dependency parsing}
+
+Given that this is the first sign language UD treebank, we decided to perform
+some dependency parsing experiments to establish some baseline results.
+
+
 
 \section{Conclusions and future work}
 
