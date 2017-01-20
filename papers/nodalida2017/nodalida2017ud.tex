@@ -185,16 +185,34 @@ treebank.
 \section{Dependency parsing}
 
 Given that this is the first sign language UD treebank, we decided to perform
-some dependency parsing experiments to establish some baseline results.
-
-
+some dependency parsing experiments to establish baseline results.
+We use the parser of \newcite{Straka2015parsito}, part of the UDpipe
+toolkit \cite{Straka2016udpipe}, for our experiments.
+A hundred iterations of random hyperparameter search was performed for each of
+their parser models (projective, partially non-projective and fully
+non-projective), and the model with highest development set accuracy was
+chosen.
+Unsurprisingly given the small amount of training data, we found the most
+constrained projective model performed best, in spite of the data containing
+non-projective trees (see \Fref{fig:ssl_dep}).
+Development set attachment score was 60 and 56 (unlabeled and labeled,
+respectively) while the corresponding test set scores were 36 and
+28. The discrepancy can be partly be attributed to the much shorter mean
+sentence length of the development set: 6.0 vs 10.4 for the test set.
+Such low scores are not yet useful for practical tasks, but we emphasize that
+our primary goal in this work is to explore the possibility of UD annotation
+for a sign language. Our annotation project is ongoing, and we intend to
+further expand the SSL part in future UD treebanks releases.
 
 \section{Conclusions and future work}
 
 In releasing the Universal Dependencies treebank of Swedish Sign Language
 (SSL), the first such resource for a signed language,
 we hope to enable new computational research into sign language syntax.
-We also hope to stimulate the development of Natural
+We have shown that even though some theoretical and practical issues exist
+when applying UD principles to a sign language, it is possible to come up with
+a reasonable annotation scheme. In the long run, we hope this will
+stimulate the development of Natural
 Language Processing (NLP) tools capable of processing sign languages.
 Finally, because we have both parallel data in Swedish and language-independent
 syntactic annotations, we also believe this resource could prove particularly
