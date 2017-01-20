@@ -85,7 +85,7 @@ The corpus is annotated using the ELAN software \cite{Wittenburg2006elan}, and t
 % TODO: se slutet av abstract, ge gärna några fler detaljer här och synka med
 % abstract (= fixa mina misstag) om det behövs
 
-\begin{figure*}
+\begin{figure*}[p]
 	\centering
 	\includegraphics[width=0.9\textwidth]{sslc_elan.png}
 	\caption{Screenshot of an SSLC file in ELAN.}
@@ -93,6 +93,35 @@ The corpus is annotated using the ELAN software \cite{Wittenburg2006elan}, and t
 \end{figure*}
 
 \section{Annotation procedure and principles for SSL}
+\label{sec:annotation}
+
+\begin{figure*}[p]
+	\centering
+	\includegraphics[width=0.9\textwidth]{sslc_elan_ud.png}
+	\caption{Screenshot of the UD annotation tiers and sign--dependency linking using ELAN.}
+	\label{fig:sslc_elan_ud}
+\end{figure*}
+
+\begin{figure*}[p]
+\centering
+\begin{dependency}[theme = simple]
+   \begin{deptext}[column sep=1em]
+      \texttt{verb} \& \texttt{verb} \& \texttt{verb} \& \texttt{noun} \& \texttt{det} \& \texttt{verb} \\
+      \textsc{s{\"a}tta-sig} \& \textsc{{\"a}ta}(Q) \& \textsc{titta-p{\aa}} \& \textsc{sn{\"o}{\string^}gubbe} \& \textsc{pek} \& \textsc{{\"a}ta}(Q) \\
+      \textsc{sit-down} \& \textsc{eat}(Q) \& \textsc{look-at} \& \textsc{snow{\string^}old-man} \& \textsc{point} \& \textsc{eat}(Q) \\
+   \end{deptext}
+   \deproot{1}{root}
+   \depedge{1}{2}{conj}
+   \depedge{1}{3}{conj}
+   \depedge{3}{4}{dobj}
+   \depedge{4}{5}{det}
+   \depedge[arc angle=50]{2}{6}{conj}
+\end{dependency}
+\caption{A PoS and dependency tagged sentence from the SSLC.}
+\label{fig:ssl_dep}
+\end{figure*}
+% TODO: sammanfatta de viktigaste språkspecifika fenomenen,
+% gärna några exempelträd
 
 For practical purposes, annotation was performed by extending the ELAN
 files of our source material from the SSLC project (see
@@ -121,48 +150,33 @@ give us a projective tree.
 % TODO: har vi något bättre exempel på detta? 
 
 Because the source material contains no segmentation above the sign level,
-we decided to annotate dependency annotation bottom-up. Segment boundaries
-then occur at the points where the annotator has chosen not to join subtrees.
-% TODO: har vi mer att säga om det här?
+we decided to use a bottom-up annotation procedure where subtrees were
+connected until we could find no more suitable mergers. The resulting fully
+connected trees were then used as ``sentences'' in the CoNLL-U format.
 
 %Because of this, and because the sign gloss annotation tiers are separate for the individual hands, we had to include one set of annotation tiers for each hand (i.e.~two per signer, or four per annotation file since there are two signers). We came up with an alignment system that combined the alignment with sign annotations and the linking of dependency relations between signs. Each tier set consisted of three tiers: \texttt{Index}; \texttt{Link}; and \texttt{UD}. The three tiers were generated using [[[technical stuff]]], creating dependent tiers to the sign gloss tiers. On the \texttt{Index} tier, each sign was assigned an integer based on its chronological position in the file (in case of overlapping signs, the onset was given precedence, or the dominant hand if onsets were identical)---this was done using a script iterating over all annotation files. On the \texttt{Link} tier, the index of the sign on which the sign was dependent was entered into each annotation cell. Lastly, on the \texttt{UD} tier, the dependency relation of a sign was entered into its annotation cell. Later, a custom script extracted this manually annotated data, and converted it into the CoNLL-U format used by the UD project. The method of using ELAN for linking and annotating dependency relations on parallel annotation tiers is shown in Figure~\ref{fig:sslc_elan_ud}.
 
-\begin{figure*}
-	\centering
-	\includegraphics[width=0.9\textwidth]{sslc_elan_ud.png}
-	\caption{Screenshot of the UD annotation tiers and sign--dependency linking using ELAN.}
-	\label{fig:sslc_elan_ud}
-\end{figure*}
-
-\begin{figure*}
-\centering
-\begin{dependency}[theme = simple]
-   \begin{deptext}[column sep=1em]
-      \texttt{verb} \& \texttt{verb} \& \texttt{verb} \& \texttt{noun} \& \texttt{det} \& \texttt{verb} \\
-      \textsc{s{\"a}tta-sig} \& \textsc{{\"a}ta}(Q) \& \textsc{titta-p{\aa}} \& \textsc{sn{\"o}{\string^}gubbe} \& \textsc{pek} \& \textsc{{\"a}ta}(Q) \\
-      \textsc{sit-down} \& \textsc{eat}(Q) \& \textsc{look-at} \& \textsc{snow{\string^}old-man} \& \textsc{point} \& \textsc{eat}(Q) \\
-   \end{deptext}
-   \deproot{1}{root}
-   \depedge{1}{2}{conj}
-   \depedge{1}{3}{conj}
-   \depedge{3}{4}{dobj}
-   \depedge{4}{5}{det}
-   \depedge[arc angle=50]{2}{6}{conj}
-\end{dependency}
-\caption{A PoS and dependency tagged sentence from the SSLC.}
-\label{fig:ssl_dep}
-\end{figure*}
-% TODO: sammanfatta de viktigaste språkspecifika fenomenen,
-% gärna några exempelträd
-
 \section{Treebank statistics}
 
+\begin{figure}[tb]
+	\centering
+	\includegraphics[width=\linewidth]{treesizes.pdf}
+    \caption{Distribution of tree sizes for the Swedish Sign
+        Language Universal Dependencies treebank.}
+	\label{fig:treesizes}
+\end{figure}
+
 The SSL treebank released in version 1.4 of the UD treebanks
-contains 82 trees with a total of 672 sign tokens.
-Annotation efforts are ongoing and we hope to publish an expanded version
-of the treebank later this year, but the most significant contribution of
-this work is that we have investigated the issues involved in dependency
-annotation of a signed language.
+contains 82 trees with a total of 672 sign tokens (mean 8.2, median 7).
+The distribution of tree sizes (in tokens) is shown in \Fref{fig:treesizes},
+as described in \Fref{sec:annotation} these were produced in a bottom-up
+fashion and reflect our judgement of the largest sensible syntactic
+segmentation of the material.
+As could be expected from a corpus of sponataneous conversation, there is a
+large number of small trees. The most comparable (due to extensive contact)
+written language, Swedish, has mean and median sentence lengths of 16.1 and
+14, although that includes punctuation which is not present in the SSL
+treebank.
 
 % TODO: någon rolig liten undersökning?
 
