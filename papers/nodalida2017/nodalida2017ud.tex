@@ -43,11 +43,11 @@
     The visual modality presents some unique challenges in analysis and
     annotation, such as the possibility of
     both hands articulating separate signs simultaneously, which has
-    implications for the central concept of \emph{projectivity}.
+    implications for the concept of \emph{projectivity} in dependency grammars.
     Our data is sourced from the Swedish Sign Language Corpus,
     and if used in conjunction these resources contain very richly
     annotated data: dependency structure and parts of speech,
-    video recordings, signer metadata, and because the whole material is
+    video recordings, signer metadata, and since the whole material is
     also translated into Swedish the corpus is also a parallel text.
 \end{abstract}
 
@@ -75,13 +75,13 @@ interpret and when necessary extend those in the context of a given language.
 
 \section{Swedish Sign Language}
 
-Swedish Sign Language (SSL) is the main sign language of the Swedish Deaf community.\footnote{Capital D ``Deaf'' is generally used to refer to the language community as a cultural and linguistic group, rather than `deaf' as a medical label.} It is estimated to be used by at least 10,000 as one of their primary languages, and is the only sign language to be recognized in Swedish law, giving it a special status alongside the official minority languages \cite{Ahlgren2006sou,Parkvall2015siffror}. The history of SSL goes back at least 200 years, since the inauguration of the first Deaf school in Sweden, and has influenced the two sign languages of Finland (i.e.~Finnish Sign Language and Finland-Swedish Sign Language) with which SSL can be said to be related \cite{Bergman2010transmission}.
+Swedish Sign Language (SSL) is the main sign language of the Swedish Deaf community.\footnote{Capital D ``Deaf'' is generally used to refer to the language community as a cultural and linguistic group, rather than `deaf' as a medical label.} It is estimated to be used by at least 10,000 as one of their primary languages, and is the only sign language to be recognized in Swedish law, giving it a special status alongside the official minority languages \cite{Ahlgren2006sou,Parkvall2015siffror}. The history of SSL goes back at least 200 years, to the inauguration of the first Deaf school in Sweden, and has also influenced the two sign languages of Finland (i.e.~Finnish Sign Language and Finland-Swedish Sign Language) with which SSL can be said to be related \cite{Bergman2010transmission}.
 
 \section{Data source}
 
-The SSL Corpus Project ran during the years 2009--2011 with the intention to establish the first systematically designed and publicly available corpus of SSL, resulting in the SSL Corpus (SSLC). Approximately 24 hours of video data of dyadic signing was recorded, comprising 42 signers of different age, gender, and geographical background, spanning 300 individual video files \cite{Mesch2012signed}. The translation and annotation work is still on-going, with new releases being available online as the work moves forward. The last official release of the SSLC includes just under 7 hours of video data \cite{Mesch2012dataset} along with annotation files containing 53,625 sign tokens across 6,197 sign types \cite{Mesch2016annotated}. 
+The SSL Corpus Project ran during the years 2009--2011 with the intention to establish the first systematically designed and publicly available corpus of SSL, resulting in the SSL Corpus (SSLC). Approximately 24 hours of video data of dyadic signing was recorded, comprising 42 signers of different age, gender, and geographical background, spanning 300 individual video files \cite{Mesch2012signed}. The translation and annotation work is still on-going, with new releases being made available online as the work moves forward. The last official release of the SSLC includes just under 7 hours of video data \cite{Mesch2012dataset} along with annotation files containing 53,625 sign tokens across 6,197 sign types \cite{Mesch2016annotated}. 
 
-The corpus is annotated using the ELAN software \cite{Wittenburg2006elan}, and the annotation files are distributed in the corresponding XML-based \texttt{.eaf} format. Each annotation file contains tiers on which annotations are aligned with the a video file, both video and annotation tiers being visible in the ELAN interface (see \Fref{fig:sslc_elan}). The SSLC annotation files currently include tiers for sign glosses, and others for Swedish translations. Sign glosses are written word labels that represent signs with approximate meanings (e.g. \textsc{pro1} for a first person pronoun). The sign gloss annotation tiers are thus segmented for lexical items (i.e.~individual signs), and come in pairs for each signer---each tier representing one of the signer's hands \cite{Mesch2015gloss}. Sign glosses also contain a part-of-speech (PoS) tag which have been derived from manually correcting the output of a semi-automatic method for cross-lingual PoS tagging \cite{Ostling2015enriching}. The translation tier is segmented into longer chunks, representing stretches of discourse that can be represented by an idiomatic Swedish translation. However, the translation segmentations do not represent clausal boundaries in neither SSL nor Swedish \cite{Borstell2014segmenting}. More recently, a portion of the SSLC was segmented into clausal units and annotated for basic syntactic roles \cite{Borstell2016syntactic}, which led to the current UD annotation work. \Fref{fig:sslc_elan} shows the basic view of the SSLC videos and annotations in the ELAN software, with tiers for sign glosses and translations on the video timeline.
+The corpus is annotated using the ELAN software \cite{Wittenburg2006elan}, and the annotation files are distributed in the corresponding XML-based \texttt{.eaf} format. Each annotation file contains tiers on which annotations are aligned with the video file, both video and annotation tiers being visible in the ELAN interface (see \Fref{fig:sslc_elan}). The SSLC annotation files currently include tiers for sign glosses, and others for Swedish translations. Sign glosses are written word labels that represent signs with approximate meanings (e.g. \textsc{pro1} for a first person pronoun). The sign gloss annotation tiers are thus segmented for lexical items (i.e.~individual signs), and come in pairs for each signer---each tier representing one of the signer's hands \cite{Mesch2015gloss}. Sign glosses also contain a part-of-speech (PoS) tag which have been derived from manually correcting the output of a semi-automatic method for cross-lingual PoS tagging \cite{Ostling2015enriching}. The translation tier is segmented into longer chunks, representing stretches of discourse that can be represented by an idiomatic Swedish translation. However, the translation segmentations do not represent clausal boundaries in either SSL or Swedish \cite{Borstell2014segmenting}. More recently, a portion of the SSLC was segmented into clausal units and annotated for basic syntactic roles \cite{Borstell2016syntactic}, which led to the current UD annotation work. \Fref{fig:sslc_elan} shows the basic view of the SSLC videos and annotations in the ELAN software, with tiers for sign glosses and translations on the video timeline.
 % TODO: se slutet av abstract, ge gärna några fler detaljer här och synka med
 % abstract (= fixa mina misstag) om det behövs
 
@@ -178,9 +178,9 @@ fashion and reflect our judgment of the largest sensible syntactic
 segmentation of the material.
 As could be expected from a corpus of spontaneous conversation, there is a
 large number of small trees. The most comparable (due to extensive contact)
-written language, Swedish, has mean and median sentence lengths of 16.1 and
-14, although that includes punctuation which is not present in the SSL
-treebank.
+UD treebank for a written language, Swedish, has mean and median sentence
+lengths of 16.1 and 14, although that includes punctuation which is not
+present in the SSL treebank.
 
 \section{Dependency parsing}
 
@@ -197,7 +197,7 @@ constrained projective model performed best, in spite of the data containing
 non-projective trees (see \Fref{fig:ssl_dep}).
 Development set attachment score was 60 and 56 (unlabeled and labeled,
 respectively) while the corresponding test set scores were 36 and
-28. The discrepancy can be partly be attributed to the much shorter mean
+28. The discrepancy can be partly attributed to the much shorter mean
 sentence length of the development set: 6.0 vs 10.4 for the test set.
 Such low scores are not yet useful for practical tasks, but we emphasize that
 our primary goal in this work is to explore the possibility of UD annotation
