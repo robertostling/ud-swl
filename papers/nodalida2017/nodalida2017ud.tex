@@ -88,7 +88,9 @@ The corpus is annotated using the ELAN software \cite{Wittenburg2006elan}, and t
 \begin{figure*}[p]
 	\centering
 	\includegraphics[width=0.9\textwidth]{sslc_elan.png}
-	\caption{Screenshot of an SSLC file in ELAN.}
+	\caption{Screenshot of an SSLC file in ELAN. This is the material we base
+    our dependency annotations on, and the annotator can easily view the
+    source video recording.}
 	\label{fig:sslc_elan}
 \end{figure*}
 
@@ -98,13 +100,15 @@ The corpus is annotated using the ELAN software \cite{Wittenburg2006elan}, and t
 \begin{figure*}[p]
 	\centering
 	\includegraphics[width=0.9\textwidth]{sslc_elan_ud.png}
-	\caption{Screenshot of the UD annotation tiers and sign--dependency linking using ELAN.}
+	\caption{Screenshot zooming into the UD annotation tiers and
+    sign--dependency linking for the utterance from \Fref{fig:sslc_elan}.
+    This is the interface used by the annotator.}
 	\label{fig:sslc_elan_ud}
 \end{figure*}
 
 \begin{figure*}[p]
 \centering
-\begin{dependency}[theme = simple]
+\begin{dependency}[theme = default, label style={scale=1.0}]
    \begin{deptext}[column sep=1em]
       \texttt{verb} \& \texttt{verb} \& \texttt{verb} \& \texttt{noun} \& \texttt{det} \& \texttt{verb} \\
       \textsc{s{\"a}tta-sig} \& \textsc{{\"a}ta}(Q) \& \textsc{titta-p{\aa}} \& \textsc{sn{\"o}{\string^}gubbe} \& \textsc{pek} \& \textsc{{\"a}ta}(Q) \\
@@ -116,12 +120,16 @@ The corpus is annotated using the ELAN software \cite{Wittenburg2006elan}, and t
    \depedge{3}{4}{dobj}
    \depedge{4}{5}{det}
    \depedge[arc angle=50]{2}{6}{conj}
+   \node (translation) [below left of = \wordref{1}{1}, xshift=6cm, yshift=-2em] {
+   `When he is sitting there eating he is constantly looking out at
+   the snowman.'};
 \end{dependency}
-\caption{A PoS and dependency tagged sentence from the SSLC.}
+\caption{The example from \Fref{fig:sslc_elan} and \Fref{fig:sslc_elan_ud}
+with dependency annotations visualized.
+The (Q) suffix on the \textsc{{\"a}ta}(Q) gloss indicates which of the
+multiple signs for `eat' in SSL is used in this case.}
 \label{fig:ssl_dep}
 \end{figure*}
-% TODO: sammanfatta de viktigaste språkspecifika fenomenen,
-% gärna några exempelträd
 
 For practical purposes, annotation was performed by extending the ELAN
 files of our source material from the SSLC project (see
