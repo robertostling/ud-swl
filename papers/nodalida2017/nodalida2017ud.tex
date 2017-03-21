@@ -9,7 +9,6 @@
 
 \documentclass[11pt]{article}
 \usepackage{nodalida2017}
-%\usepackage{times}
 \usepackage{mathptmx}
 %\usepackage{txfonts}
 \usepackage{url}
@@ -21,16 +20,11 @@
 
 \title{Universal Dependencies for Swedish Sign Language}
 
-\author{First Author \\
-  Affiliation / Address line 1 \\
-  Affiliation / Address line 2 \\
-  Affiliation / Address line 3 \\
-  {\tt email@domain} \\\And
-  Second Author \\
-  Affiliation / Address line 1 \\
-  Affiliation / Address line 2 \\
-  Affiliation / Address line 3 \\
-  {\tt email@domain} \\}
+\author{Robert {\"O}stling, Carl B{\"o}rstell,
+    Moa G{\"a}rdenfors, Mats Wir{\'e}n \\
+  Department of Linguistics \\
+  Stockholm University \\
+  {\tt \{robert,calle,moa.gardenfors,mats.wiren\}@ling.su.se} \\}
 
 \date{}
 
@@ -62,6 +56,14 @@ writing (version 1.4) contains 64 treebanks in 47 languages---one of which is
 Swedish Sign Language (SSL, ISO 639-3: \textsc{swl}), the topic of this
 article.
 
+A small number of Syntactically annotated sign language corpora are available
+(TDB).
+% TODO: Calle, kan du citera andra som har någon form av syntaktisk
+% annotering?
+To the best of our knowledge, we present the first dependency annotation and
+parsing experiments with sign language data. This brings us one step closer to
+the goal of bridging the gap in availability between written, spoken and sign
+language natural language processing tools.
 
 \section{Universal Dependencies}
 
@@ -163,7 +165,8 @@ experiments.
 
 Because the source material contains no segmentation above the sign level,
 we decided to use a bottom-up annotation procedure where subtrees were
-connected until we could find no more suitable mergers. The resulting fully
+connected until we could find no more suitable mergers. In other words,
+the segmentation is entirely based on syntactic structure. The resulting fully
 connected trees were then used as ``sentences'' in the CoNLL-U format.
 
 %Because of this, and because the sign gloss annotation tiers are separate for the individual hands, we had to include one set of annotation tiers for each hand (i.e.~two per signer, or four per annotation file since there are two signers). We came up with an alignment system that combined the alignment with sign annotations and the linking of dependency relations between signs. Each tier set consisted of three tiers: \texttt{Index}; \texttt{Link}; and \texttt{UD}. The three tiers were generated using [[[technical stuff]]], creating dependent tiers to the sign gloss tiers. On the \texttt{Index} tier, each sign was assigned an integer based on its chronological position in the file (in case of overlapping signs, the onset was given precedence, or the dominant hand if onsets were identical)---this was done using a script iterating over all annotation files. On the \texttt{Link} tier, the index of the sign on which the sign was dependent was entered into each annotation cell. Lastly, on the \texttt{UD} tier, the dependency relation of a sign was entered into its annotation cell. Later, a custom script extracted this manually annotated data, and converted it into the CoNLL-U format used by the UD project. The method of using ELAN for linking and annotating dependency relations on parallel annotation tiers is shown in Figure~\ref{fig:sslc_elan_ud}.
@@ -185,17 +188,20 @@ as described in \Fref{sec:annotation} these were produced in a bottom-up
 fashion and reflect our judgment of the largest sensible syntactic
 segmentation of the material.
 As could be expected from a corpus of spontaneous conversation, there is a
-large number of small trees. The most comparable (due to extensive contact)
-UD treebank for a written language, Swedish, has mean and median sentence
-lengths of 16.1 and 14, although that includes punctuation which is not
-present in the SSL treebank.
+large number of small trees. For comparison, the only spoken language
+(Slovenian) treebank has
+mean 9.1 and median 6, while the written Swedish treebank (a language which
+SSL has been in extensive contact with) has mean 14.3 and median 13 sentence
+length, not counting punctuation.
 
 \section{Dependency parsing}
 
 Given that this is the first sign language UD treebank, we decided to perform
 some dependency parsing experiments to establish baseline results.
 We use the parser of \newcite{Straka2015parsito}, part of the UDpipe
-toolkit \cite{Straka2016udpipe}, for our experiments.
+toolkit \cite{Straka2016udpipe}, for our experiments. The training (334
+tokens), development (48 tokens) and test (290 tokens) split from
+UD treebanks 1.4 was used.
 A hundred iterations of random hyperparameter search was performed for each of
 their parser models (projective, partially non-projective and fully
 non-projective), and the model with highest development set accuracy was
