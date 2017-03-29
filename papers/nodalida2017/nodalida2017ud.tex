@@ -56,10 +56,17 @@ writing (version 1.4) contains 64 treebanks in 47 languages---one of which is
 Swedish Sign Language (SSL, ISO 639-3: \textsc{swl}), the topic of this
 article.
 
-A small number of Syntactically annotated sign language corpora are available
-(TDB).
-% TODO: Calle, kan du citera andra som har någon form av syntaktisk
-% annotering?
+There are very few sign languages for which there are corpora. Most of the available
+sign language corpora feature only simple sign segmentation and annotations, 
+often also with some type of translation into a spoken language (either as written 
+translations or as spoken voice-overs). Sign language corpora with more extensive 
+syntactic annotation is limited to Australian Sign Language, 
+which contains some basic syntactic segmentation and annotation 
+\cite{Johnston2014annotation}. Apart from this, smaller parts of the corpora of Finnish Sign 
+Language \cite{Jantunen2016corpus} and Polish Sign Language \cite{Rutkowski2016corpus}, 
+have had some syntactic segmentation and analysis, and another such project is under way 
+on British Sign Language.\footnote{\url{http://www.bslcorpusproject.org/projects/bsl-syntax-project/}}
+
 To the best of our knowledge, we present the first dependency annotation and
 parsing experiments with sign language data. This brings us one step closer to
 the goal of bridging the gap in availability between written, spoken and sign
@@ -81,9 +88,9 @@ Swedish Sign Language (SSL) is the main sign language of the Swedish Deaf commun
 
 \section{Data source}
 
-The SSL Corpus Project ran during the years 2009--2011 with the intention to establish the first systematically designed and publicly available corpus of SSL, resulting in the SSL Corpus (SSLC). Approximately 24 hours of video data of dyadic signing was recorded, comprising 42 signers of different age, gender, and geographical background, spanning 300 individual video files \cite{Mesch2012signed}. The translation and annotation work is still on-going, with new releases being made available online as the work moves forward. The last official release of the SSLC includes just under 7 hours of video data \cite{Mesch2012dataset} along with annotation files containing 53,625 sign tokens across 6,197 sign types \cite{Mesch2016annotated}. 
+The SSL Corpus Project ran during the years 2009--2011 with the intention to establish the first systematically designed and publicly available corpus of SSL, resulting in the SSL Corpus (SSLC). Approximately 24 hours of video data of pairs of signers conversing was recorded, comprising 42 signers of different age, gender, and geographical background, spanning 300 individual video files \cite{Mesch2012signed}. The translation and annotation work is still on-going, with new releases being made available online as the work moves forward. The last official release of the SSLC includes just under 7 hours of video data \cite{Mesch2012dataset} along with annotation files containing 53,625 sign tokens across 6,197 sign types \cite{Mesch2016annotated}. 
 
-The corpus is annotated using the ELAN software \cite{Wittenburg2006elan}, and the annotation files are distributed in the corresponding XML-based \texttt{.eaf} format. Each annotation file contains tiers on which annotations are aligned with the video file, both video and annotation tiers being visible in the ELAN interface (see \Fref{fig:sslc_elan}). The SSLC annotation files currently include tiers for sign glosses, and others for Swedish translations. Sign glosses are written word labels that represent signs with approximate meanings (e.g. \textsc{pro1} for a first person pronoun). The sign gloss annotation tiers are thus segmented for lexical items (i.e.~individual signs), and come in pairs for each signer---each tier representing one of the signer's hands \cite{Mesch2015gloss}. Sign glosses also contain a part-of-speech (PoS) tag which have been derived from manually correcting the output of a semi-automatic method for cross-lingual PoS tagging \cite{Ostling2015enriching}. The translation tier is segmented into longer chunks, representing stretches of discourse that can be represented by an idiomatic Swedish translation. However, the translation segmentations do not represent clausal boundaries in either SSL or Swedish \cite{Borstell2014segmenting}. More recently, a portion of the SSLC was segmented into clausal units and annotated for basic syntactic roles \cite{Borstell2016syntactic}, which led to the current UD annotation work. \Fref{fig:sslc_elan} shows the basic view of the SSLC videos and annotations in the ELAN software, with tiers for sign glosses and translations on the video timeline.
+The corpus is annotated using the ELAN software \cite{Wittenburg2006elan}, and the annotation files are distributed in the corresponding XML-based \texttt{.eaf} format. Each annotation file contains tiers on which annotations are aligned with the video file, both video and annotation tiers being visible in the ELAN interface (see \Fref{fig:sslc_elan}). The SSLC annotation files currently include tiers for sign glosses, and others for Swedish translations. Sign glosses are written word labels that represent signs with approximate meanings (e.g. \textsc{pro1} for a first person pronoun). The sign gloss annotation tiers are thus segmented for lexical items (i.e.~individual signs), and come in pairs for each signer---each tier representing one of the signer's hands (one tier for the so-called \textit{dominant hand}, and another for the \textit{non-dominant hand}) \cite{Mesch2015gloss}.\footnote{The dominant hand is defined as the hand preferred by a signer when signing a one-handed sign.} Sign glosses also contain a part-of-speech (PoS) tag which have been derived from manually correcting the output of a semi-automatic method for cross-lingual PoS tagging \cite{Ostling2015enriching}. The translation tier is segmented into longer chunks, representing stretches of discourse that can be represented by an idiomatic Swedish translation. However, the translation segmentations do not represent clausal boundaries in either SSL or Swedish \cite{Borstell2014segmenting}. More recently, a portion of the SSLC was segmented into clausal units and annotated for basic syntactic roles \cite{Borstell2016syntactic}, which led to the current UD annotation work. \Fref{fig:sslc_elan} shows the basic view of the SSLC videos and annotations in the ELAN software, with tiers for sign glosses and translations on the video timeline.
 % TODO: se slutet av abstract, ge gärna några fler detaljer här och synka med
 % abstract (= fixa mina misstag) om det behövs
 
@@ -123,7 +130,7 @@ The corpus is annotated using the ELAN software \cite{Wittenburg2006elan}, and t
    \depedge{4}{5}{det}
    \depedge[arc angle=50]{2}{6}{conj}
    \node (translation) [below left of = \wordref{1}{1}, xshift=6cm, yshift=-2em] {
-   `When he is sitting there eating he is constantly looking out at
+   `He is sitting there eating looking out at
    the snowman.'};
 \end{dependency}
 \caption{The example from \Fref{fig:sslc_elan} and \Fref{fig:sslc_elan_ud}
@@ -146,7 +153,7 @@ These trees can however have some unusual properties compared to spoken
 languages.
 For the purpose of conforming to the CoNLL-U data format,
 which requires an ordered sequence of tokens, we sort
-signs by onset time and break ties in favor of signs articulated by the
+signs by their chronological order. The chronological order spans both sign tiers per signer, and is defined as the onset time of each sign annotation. In the case of two signs on each hand tier (i.e.~dominant vs.~non-dominant hand) having identical onsets, favor is given to signs articulated by the
 signer's dominant hand.
 This working definition is by no means the only reasonable linearization,
 which means that the notion of projectivity to some extent loses its meaning.
