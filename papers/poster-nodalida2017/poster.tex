@@ -13,12 +13,21 @@
 \DeclareTextSymbolDefault{\dh}{T1}
 
 
-\title{Universal Dependencies for Swedish Sign Language}
+\title{Universal Dependencies \\ for Swedish Sign Language}
 \author{Robert {\"O}stling, Carl B{\"o}rstell, Moa G{\"a}rdenfors,
     Mats Wir{\'e}n}
 \institute{Stockholm University}
 
 \begin{document}
+
+\addtobeamertemplate{headline}{} 
+{
+    \begin{tikzpicture}[remember picture,overlay] 
+        \node [shift={(-5cm,-3cm)}] at (current page.north east)
+        {\includegraphics[height=5cm]{logo-org-engelsk_rgb.eps}}; 
+    \end{tikzpicture} 
+}
+
 \begin{frame}{}
     \vfill
     \begin{columns}[t]
