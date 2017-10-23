@@ -19,7 +19,7 @@ POS_TABLE = {
         'PN':       'PRON',
         'JJ':       'ADJ',
         'PP':       'ADP',
-        'KN':       'CONJ',
+        'KN':       'CCONJ',
         'RG':       'NUM',
         'VB':       'VERB',
         'VBS':      'VERB',
@@ -42,7 +42,9 @@ def convert(filename):
     utts = []
 
     def translate_pos(pos, dep, gloss):
-        if '?' in pos:
+        if pos in ('?', ''):
+            print('No PoS tag given for %s' % gloss, file=sys.stderr)
+        elif '?' in pos:
             print('Warning: removing ? from "%s"' % pos, file=sys.stderr)
             pos = pos.replace('?', '')
         elif pos not in POS_TABLE:
@@ -108,6 +110,7 @@ def convert(filename):
             if dep:
                 # hack to fix typo
                 if dep == 'reparandium': dep = 'reparandum'
+                if dep == 'advlcl': dep = 'advcl'
                 slots[(hand, t0, t1)]['dep'] = dep
 
         children = defaultdict(list)
@@ -171,17 +174,28 @@ def convert(filename):
     print('%s: %d trees with %d signs' % (
         filename, len(utts), sum(map(len, utts))),
         file=sys.stderr)
-    return [utt_to_conllu(utt) for utt in utts]
+    return [(utt, utt_to_conllu(utt)) for utt in utts]
 
 
 def main():
-    for filename in sys.argv[1:]:
-        print('Converting %s...' % filename, file=sys.stderr)
-        sents = convert(filename)
-        for sent in sents:
-            for sign in sent:
-                print('\t'.join(sign))
-            print()
+    out_filename = sys.argv[-1]
+    assert out_filename.endswith('.conllu')
+    with open(out_filename, 'a') as outf:
+        for filename in sys.argv[1:-1]:
+            print('Converting %s...' % filename, file=sys.stderr)
+            m = re.match(r'(SSLC\d+_\d+)_UD', os.path.basename(filename))
+            assert m is not None
+            base = m.group(1)
+            sents = convert(filename)
+            for i,(utt,sent) in enumerate(sents):
+                s0 = min(sign['index'] for sign in utt)
+                s1 = max(sign['index'] for sign in utt)
+                print('# sent_id = %s:%d:%d' % (base, s0, s1), file=outf)
+                print('# text =', ' '.join(line[1] for line in sent),
+                      file=outf)
+                for sign in sent:
+                    print('\t'.join(sign), file=outf)
+                print(file=outf)
 
 
 if __name__ == '__main__': main()
