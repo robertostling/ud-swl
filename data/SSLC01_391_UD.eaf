@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<ANNOTATION_DOCUMENT AUTHOR="" DATE="2017-10-12T11:58:59+01:00" FORMAT="3.0" VERSION="3.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="http://www.mpi.nl/tools/elan/EAFv3.0.xsd">
+<ANNOTATION_DOCUMENT AUTHOR="" DATE="2017-10-23T15:17:46+01:00" FORMAT="2.8" VERSION="2.8" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="http://www.mpi.nl/tools/elan/EAFv2.8.xsd">
     <HEADER MEDIA_FILE="" TIME_UNITS="milliseconds">
-        <MEDIA_DESCRIPTOR MEDIA_URL="file:///C:/Users/cab2091/Desktop/SSLC_201509/SSLC01_391_S039_b.mpg" MIME_TYPE="video/mpeg" RELATIVE_MEDIA_URL="../../../Desktop/SSLC_201509/SSLC01_391_S039_b.mpg"/>
-        <MEDIA_DESCRIPTOR MEDIA_URL="file:///C:/Users/cab2091/Desktop/SSLC_201509/SSLC01_391_S040_b.mpg" MIME_TYPE="video/mpeg" RELATIVE_MEDIA_URL="../../../Desktop/SSLC_201509/SSLC01_391_S040_b.mpg"/>
+        <MEDIA_DESCRIPTOR MEDIA_URL="file:///Users/calleborstell/Desktop/SSLC_201509/SSLC01_391_S039_b.mpg" MIME_TYPE="video/mpeg" RELATIVE_MEDIA_URL="../../../Desktop/SSLC_201509/SSLC01_391_S039_b.mpg"/>
+        <MEDIA_DESCRIPTOR MEDIA_URL="file:///Users/calleborstell/Desktop/SSLC_201509/SSLC01_391_S040_b.mpg" MIME_TYPE="video/mpeg" RELATIVE_MEDIA_URL="../../../Desktop/SSLC_201509/SSLC01_391_S040_b.mpg"/>
         <PROPERTY NAME="URN">urn:nl-mpi-tools-elan-eaf:9a5b211a-9481-4de6-8cd4-ab16d0db9915</PROPERTY>
         <PROPERTY NAME="lastUsedAnnotationId">1477</PROPERTY>
     </HEADER>
@@ -254,9 +254,9 @@
         <TIME_SLOT TIME_SLOT_ID="ts245" TIME_VALUE="34257"/>
         <TIME_SLOT TIME_SLOT_ID="ts246" TIME_VALUE="34437"/>
         <TIME_SLOT TIME_SLOT_ID="ts247" TIME_VALUE="34437"/>
-        <TIME_SLOT TIME_SLOT_ID="ts248" TIME_VALUE="34691"/>
+        <TIME_SLOT TIME_SLOT_ID="ts248" TIME_VALUE="34686"/>
         <TIME_SLOT TIME_SLOT_ID="ts249" TIME_VALUE="34691"/>
-        <TIME_SLOT TIME_SLOT_ID="ts250" TIME_VALUE="35371"/>
+        <TIME_SLOT TIME_SLOT_ID="ts250" TIME_VALUE="35369"/>
         <TIME_SLOT TIME_SLOT_ID="ts251" TIME_VALUE="35371"/>
         <TIME_SLOT TIME_SLOT_ID="ts252" TIME_VALUE="35521"/>
         <TIME_SLOT TIME_SLOT_ID="ts253" TIME_VALUE="35521"/>
@@ -780,7 +780,7 @@
         </ANNOTATION>
         <ANNOTATION>
             <ALIGNABLE_ANNOTATION ANNOTATION_ID="a5" TIME_SLOT_REF1="ts18" TIME_SLOT_REF2="ts20">
-                <ANNOTATION_VALUE>KORTVARIG(J)[?]</ANNOTATION_VALUE>
+                <ANNOTATION_VALUE>KORTVARIG(J)[JJ]</ANNOTATION_VALUE>
             </ALIGNABLE_ANNOTATION>
         </ANNOTATION>
         <ANNOTATION>
@@ -1045,7 +1045,7 @@
         </ANNOTATION>
         <ANNOTATION>
             <ALIGNABLE_ANNOTATION ANNOTATION_ID="a57" TIME_SLOT_REF1="ts244" TIME_SLOT_REF2="ts246">
-                <ANNOTATION_VALUE>GÅ(Vb)[?]</ANNOTATION_VALUE>
+                <ANNOTATION_VALUE>GÅ(Vb)[VB]</ANNOTATION_VALUE>
             </ALIGNABLE_ANNOTATION>
         </ANNOTATION>
         <ANNOTATION>
@@ -1055,7 +1055,7 @@
         </ANNOTATION>
         <ANNOTATION>
             <ALIGNABLE_ANNOTATION ANNOTATION_ID="a59" TIME_SLOT_REF1="ts252" TIME_SLOT_REF2="ts254">
-                <ANNOTATION_VALUE>GÅ(N)[?]</ANNOTATION_VALUE>
+                <ANNOTATION_VALUE>GÅ(N)[VB]</ANNOTATION_VALUE>
             </ALIGNABLE_ANNOTATION>
         </ANNOTATION>
         <ANNOTATION>
@@ -1070,7 +1070,7 @@
         </ANNOTATION>
         <ANNOTATION>
             <ALIGNABLE_ANNOTATION ANNOTATION_ID="a62" TIME_SLOT_REF1="ts268" TIME_SLOT_REF2="ts270">
-                <ANNOTATION_VALUE>GÅ(N)[?]</ANNOTATION_VALUE>
+                <ANNOTATION_VALUE>GÅ(N)[VB]</ANNOTATION_VALUE>
             </ALIGNABLE_ANNOTATION>
         </ANNOTATION>
         <ANNOTATION>
@@ -1405,7 +1405,7 @@
         </ANNOTATION>
         <ANNOTATION>
             <ALIGNABLE_ANNOTATION ANNOTATION_ID="a129" TIME_SLOT_REF1="ts570" TIME_SLOT_REF2="ts572">
-                <ANNOTATION_VALUE>GREPPA[?]</ANNOTATION_VALUE>
+                <ANNOTATION_VALUE>GREPPA[VB]</ANNOTATION_VALUE>
             </ALIGNABLE_ANNOTATION>
         </ANNOTATION>
         <ANNOTATION>
